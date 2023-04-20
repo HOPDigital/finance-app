@@ -1,9 +1,8 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_application/widgets/CreditCard.dart';
 
 import '../../utils/styles/colors.dart';
-import '../../widgets/AppLargeText.dart';
-import '../../widgets/AppScreenTitle.dart';
+import '../../widgets/app_large_text.dart';
+import '../../widgets/app_screen_title.dart';
 
 class FirstBoardingScreen extends StatelessWidget {
   const FirstBoardingScreen({super.key});
