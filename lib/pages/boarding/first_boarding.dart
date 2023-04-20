@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_application/layouts/boarding_layout.dart';
 
-import '../../utils/styles/colors.dart';
+// Widgets
 import '../../widgets/app_large_text.dart';
 import '../../widgets/app_screen_title.dart';
 
@@ -9,14 +10,12 @@ class FirstBoardingScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-        body: Container(
-      decoration: BoxDecoration(color: AppColors.blueColor),
-      child: Column(
+    return BoardingLayout(
+      column: Column(
+        mainAxisAlignment: MainAxisAlignment.spaceBetween,
         children: [
-          const SizedBox(height: 25),
           AppScreenTitle(
-            text: 'Boarding 01',
+            text: 'What\'s new',
             leftButton: IconButton(
               onPressed: () => {},
               icon: const Icon(
@@ -25,17 +24,16 @@ class FirstBoardingScreen extends StatelessWidget {
               ),
             ),
             rightButton: const Text(
-              'Pular',
+              'Skip',
               style: TextStyle(color: Colors.white),
             ),
           ),
-          const SizedBox(height: 400),
           Container(
             padding: const EdgeInsets.only(left: 20),
             child: const AppLargeText(text: 'Track your money everywhere.'),
           ),
         ],
       ),
-    ));
+    );
   }
 }
