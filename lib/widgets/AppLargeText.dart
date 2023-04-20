@@ -9,7 +9,7 @@ class AppLargeText extends StatelessWidget {
     super.key,
     required this.text,
     this.color = Colors.white,
-    this.size = 34,
+    this.size = 48,
   });
 
   @override

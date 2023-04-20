@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_application/pages/boarding/first_boarding.dart';
 
 void main() => runApp(const MainApp());
 
@@ -10,7 +11,7 @@ class MainApp extends StatelessWidget {
     return const MaterialApp(
       home: Scaffold(
         body: Center(
-          child: Text('Hello World!'),
+          child: FirstBoardingScreen(),
         ),
       ),
     );
