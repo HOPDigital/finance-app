@@ -14,22 +14,16 @@ class FirstBoardingScreen extends StatelessWidget {
       column: Column(
         mainAxisAlignment: MainAxisAlignment.spaceBetween,
         children: [
-          AppScreenTitle(
+          const AppScreenTitle(
             text: 'What\'s new',
-            leftButton: IconButton(
-              onPressed: () => {},
-              icon: const Icon(
-                Icons.arrow_back_ios,
-                size: 0,
-              ),
-            ),
-            rightButton: const Text(
+            rightButton: Text(
               'Skip',
               style: TextStyle(color: Colors.white),
             ),
           ),
           Container(
-            padding: const EdgeInsets.only(left: 20),
+            height: 240,
+            padding: const EdgeInsets.symmetric(horizontal: 20),
             child: const AppLargeText(text: 'Track your money everywhere.'),
           ),
         ],
