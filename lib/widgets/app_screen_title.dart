@@ -1,33 +1,39 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_application/utils/styles/typography.dart';
 
 class AppScreenTitle extends StatelessWidget {
-  final Widget leftButton;
-  final Widget rightButton;
+  final Widget? leftButton;
+  final Widget? rightButton;
   final String text;
 
   const AppScreenTitle({
     super.key,
-    this.leftButton = const SizedBox(),
-    this.rightButton = const SizedBox(),
     required this.text,
+    this.leftButton,
+    this.rightButton,
   });
 
   @override
   Widget build(BuildContext context) {
-    return Container(
-      padding: const EdgeInsets.only(left: 10, right: 10),
-      height: 50,
-      width: double.maxFinite,
-      alignment: Alignment.center,
-      child: Row(mainAxisAlignment: MainAxisAlignment.spaceBetween, children: [
-        leftButton,
+    return Row(
+      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+      crossAxisAlignment: CrossAxisAlignment.center,
+      children: [
+        SizedBox(
+            height: 50,
+            width: 100,
+            child: Center(
+                child: leftButton ?? const SizedBox(height: 20, width: 20))),
         Text(
           text,
-          style: const TextStyle(
-              fontSize: 16, fontWeight: FontWeight.bold, color: Colors.white),
+          style: AppTypography.headline,
         ),
-        rightButton,
-      ]),
+        SizedBox(
+            height: 50,
+            width: 100,
+            child: Center(
+                child: rightButton ?? const SizedBox(height: 20, width: 20)))
+      ],
     );
   }
 }
