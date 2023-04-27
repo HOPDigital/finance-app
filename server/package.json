@@ -1,0 +1,16 @@
+{
+  "name": "finance-app-server",
+  "version": "1.0.0",
+  "description": "Back end part of the finance-app project",
+  "main": "server.js",
+  "repository": "https://github.com/HOP-Projects/finance-app",
+  "author": "Hop-digital",
+  "license": "MIT",
+  "dependencies": {
+    "body-parser": "^1.20.2",
+    "cors": "^2.8.5",
+    "express": "^4.18.2",
+    "mongoose": "^7.0.5",
+    "nodemon": "^2.0.22"
+  }
+}

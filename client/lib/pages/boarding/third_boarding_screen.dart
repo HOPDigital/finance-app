@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_application/pages/boarding/second_boarding_screen.dart';
 
 // Utils
 import 'package:flutter_application/utils/helpers/app_layout.dart';

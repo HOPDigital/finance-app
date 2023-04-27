@@ -2,7 +2,6 @@ import 'package:flutter/material.dart';
 import 'package:flutter_application/source/model/credit_card_model.dart';
 import 'package:flutter_application/utils/styles/colors.dart';
 import 'package:flutter_application/utils/styles/typography.dart';
-import 'package:google_fonts/google_fonts.dart';
 
 class CreditCardWidget extends StatelessWidget {
   const CreditCardWidget({super.key, required this.card});

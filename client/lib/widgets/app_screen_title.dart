@@ -24,9 +24,11 @@ class AppScreenTitle extends StatelessWidget {
             width: 100,
             child: Center(
                 child: leftButton ?? const SizedBox(height: 20, width: 20))),
-        Text(
-          text,
-          style: AppTypography.headline,
+        Center(
+          child: Text(
+            text,
+            style: AppTypography.headline,
+          ),
         ),
         SizedBox(
             height: 50,

@@ -38,12 +38,11 @@ class _OnBoardingScreenState extends State<OnBoardingScreen> {
               controller: _controller,
               count: 3,
               effect: ExpandingDotsEffect(
-                activeDotColor: AppColors.whiteColor,
-                dotColor: AppColors.whiteColor,
-                dotHeight: 10,
-                dotWidth: 10,
-                spacing: 10
-              ),
+                  activeDotColor: AppColors.whiteColor,
+                  dotColor: AppColors.whiteColor,
+                  dotHeight: 10,
+                  dotWidth: 10,
+                  spacing: 10),
             ),
           ),
         ],
