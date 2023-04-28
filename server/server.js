@@ -15,7 +15,6 @@ app.use(express.json())
 
 app.use('/user', UserController)
 
-
 app.listen(SERVER_PORT)
     .on('listening', () => console.log('SERVER IS UP'))
 

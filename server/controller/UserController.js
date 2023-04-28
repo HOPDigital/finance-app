@@ -1,19 +1,17 @@
-const router = require('express').Router();
 const UserModel = require('../model/UserModel')
 const bcrypt = require('bcryptjs')
 const jwt = require('jsonwebtoken')
 
-// Get user
-router.get('/', async (req, res) => {
+const getUserById = async (req, res) => {
     const data = await UserModel.find({})
     res.status(200).json(data)
-})
+}
 
-// Authenticate user
-router.post('/login', (req, res) => { })
+const authenticateUser = (req, res) => {
 
-// Create user
-router.post('/register', async (req, res) => {
+}
+
+const createUser = async (req, res) => {
     try {
         const {
             email,
@@ -71,12 +69,20 @@ router.post('/register', async (req, res) => {
         console.log(err)
         res.status(500).send('Error registering user')
     }
-})
+}
 
-// Update user
-router.patch('/', (req, res) => { })
+const updateUser = (req, res) => { 
 
-// Delete user
-router.delete('/', (req, res) => { })
+}
 
-module.exports = router
+const deleteUser = (req, res) => { 
+
+}
+
+module.exports = {
+    getUserById,
+    authenticateUser,
+    createUser,
+    updateUser,
+    deleteUser
+}
