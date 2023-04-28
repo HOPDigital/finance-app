@@ -1,16 +1,22 @@
 const express = require('express')
 const bodyParser = require('body-parser')
 const cors = require('cors')
-const mongoose = require('mongoose')
 
-const PORT = 8001
+const UserController = require('./controller/UserController')
 
-console.clear()
 
 const app = express()
+require('dotenv').config()
 
-app.listen(PORT).on('listening', () => console.log('SERVER IS UP'))
+const { SERVER_PORT } = process.env
 
-app.get('/', (req, res) => {
-    res.send('Hello World')
-})
+app.use(cors())
+app.use(express.json())
+
+app.use('/user', UserController)
+
+
+app.listen(SERVER_PORT)
+    .on('listening', () => console.log('SERVER IS UP'))
+
+require('./config/database').connect()
