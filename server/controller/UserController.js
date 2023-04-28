@@ -41,7 +41,7 @@ router.post('/register', async (req, res) => {
         const old_user = await UserModel.findOne({ email })
         if (old_user) { res.status(409).send('User already exists'); return }
 
-        const encrypted_password = bcrypt.hash(password, 10)
+        const encrypted_password = await bcrypt.hash(password, 10)
 
         const user = (await UserModel.create({
             first_name,
