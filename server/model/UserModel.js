@@ -1,5 +1,8 @@
 const mongoose = require('mongoose')
 
+const CompanySchema = require('./CompanyModel').schema
+const MoneyBox = require('./MoneyBox').schema
+
 const user = new mongoose.Schema({
     first_name: { type: String, required: true }, // André de Lara,
     last_name: { type: String, required: true },
@@ -10,7 +13,9 @@ const user = new mongoose.Schema({
     city: String, // São Bernardo do Campo
     country: { type: String, required: true }, // Brazil
     profile_picture: String, // base64,
-    created_at: { type: Date, default: new Date().toISOString() }
+    created_at: { type: Date, default: new Date().toISOString() },
+    companies: [CompanySchema],
+    boxes: [MoneyBox]
 })
 
 const UserModel = mongoose.model('user', user)
