@@ -1,4 +1,5 @@
 const mongoose = require('mongoose')
+const CategoryModel = require('./CategoryModel').schema
 
 
 const schema = new mongoose.Schema({
@@ -8,7 +9,7 @@ const schema = new mongoose.Schema({
     date: Date,
     created_at: { type: Date, Default: new Date() },
     description: String,
-    category: String
+    category: CategoryModel
 })
 const model = mongoose.model('transaction', schema)
 module.exports = { model, schema }

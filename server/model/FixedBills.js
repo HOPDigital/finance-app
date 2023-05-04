@@ -3,8 +3,8 @@ const mongoose = require('mongoose')
 const schema = new mongoose.Schema({
     name: { type: String, required: true },
     value: { type: Number, required: true },
-    day: Number,
-    interval: Number
+    interval: { type: Number, required: true },
+    day: { type: Number, required: true },
 })
 
 const model = mongoose.model('fixed_bills', schema)
