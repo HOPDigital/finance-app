@@ -3,7 +3,7 @@ const mongoose = require('mongoose')
 const CompanySchema = require('./CompanyModel').schema
 const MoneyBox = require('./MoneyBox').schema
 
-const user = new mongoose.Schema({
+const schema = new mongoose.Schema({
     first_name: { type: String, required: true }, // André de Lara,
     last_name: { type: String, required: true },
     password: { type: String, required: true },
@@ -18,5 +18,5 @@ const user = new mongoose.Schema({
     boxes: [MoneyBox]
 })
 
-const UserModel = mongoose.model('user', user)
-module.exports = UserModel
+const model = mongoose.model('user', schema)
+module.exports = { model, schema }

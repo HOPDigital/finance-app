@@ -3,6 +3,7 @@ const bodyParser = require('body-parser')
 const cors = require('cors')
 
 const UserRoute = require('./routes/UserRoute')
+const MoneyBoxRoute = require('./routes/BoxRoute')
 const CategoryRoute = require('./routes/CategoriesRoute')
 
 const app = express()
@@ -14,6 +15,7 @@ app.use(cors())
 app.use(express.json())
 
 app.use('/user', UserRoute)
+app.use('/boxes', MoneyBoxRoute)
 app.use('/categories', CategoryRoute)
 
 app.listen(SERVER_PORT)
@@ -21,3 +23,6 @@ app.listen(SERVER_PORT)
 
 
 require('./config/database').connect()
+
+
+module.exports = app
