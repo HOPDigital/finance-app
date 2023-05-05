@@ -19,7 +19,6 @@ app.use('/boxes', MoneyBoxRoute)
 app.use('/categories', CategoryRoute)
 
 app.listen(SERVER_PORT)
-    .on('listening', () => console.log('SERVER IS UP'))
 
 
 require('./config/database').connect()

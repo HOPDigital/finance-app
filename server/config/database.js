@@ -7,9 +7,9 @@ exports.connect = () => {
     mongoose
         .connect(MONGO_URI)
 
-        .then(() => {
+        /* .then(() => {
             console.log('CONNECTED TO DATABASE')
-        })
+        }) */
 
         .catch(err => {
             console.log("ERROR CONNECTING TO DATABASE\n\n")
