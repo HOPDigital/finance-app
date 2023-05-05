@@ -19,9 +19,8 @@ const get = async (req, res, user_id) => {
 
     const boxes = user.boxes
 
-    res.status(200).json(boxes)
+    res?.status(200).json(boxes)
 }
-
 
 /**
  * Create a new MoneyBox for a User document

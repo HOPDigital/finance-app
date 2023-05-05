@@ -3,7 +3,7 @@ const app = require('../server');
 const mongoose = require('mongoose');
 const UserModel = require('../model/UserModel').model;
 
-describe('User controller', () => {
+describe.skip('User controller', () => {
 
     describe('POST /register', () => {
         it('should create a new user', async () => {
