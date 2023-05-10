@@ -2,7 +2,7 @@ const request = require('supertest');
 const app = require('../server');
 const mongoose = require('mongoose');
 
-const user_id = new mongoose.Types.ObjectId('6454630f15f726bd4fcd7666'); // Generate a fake user ID
+const user_id = new mongoose.Types.ObjectId('645aeaecdc5fbd2b808abd32'); // Generate a fake user ID
 const box_id = new mongoose.Types.ObjectId(); // Generate a fake box ID
 
 describe('BoxController', () => {

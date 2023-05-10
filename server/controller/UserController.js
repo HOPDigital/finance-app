@@ -8,7 +8,7 @@ const getUserById = async (req, res) => {
 }
 
 const authenticateUser = (req, res) => {
-
+    
 }
 
 const createUser = async (req, res) => {
@@ -55,7 +55,7 @@ const createUser = async (req, res) => {
 
         const token = jwt.sign(
             { user_id: user._id, email },
-            process.env.TOKEN_KEY,
+            process.env.SECRET,
             { expiresIn: '2h' }
         )
 
@@ -71,11 +71,11 @@ const createUser = async (req, res) => {
     }
 }
 
-const updateUser = (req, res) => { 
+const updateUser = (req, res) => {
 
 }
 
-const deleteUser = (req, res) => { 
+const deleteUser = (req, res) => {
 
 }
 
