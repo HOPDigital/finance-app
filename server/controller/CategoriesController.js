@@ -4,15 +4,15 @@ const DefaultController = require('./DefaultController')
 const Controller = new DefaultController(CategoryModel)
 
 // Get Methods
-const getAll = async (req, res) => Controller.getAll(req, res)
+const getAllCategories = async (req, res) => Controller.getAll(req, res)
 
-const getById = (id, callback) => { }
+const getCategoryById = (id, callback) => { }
 
-const getByName = (name, callback) => { }
+const getCategoryByName = (name, callback) => { }
 
 
 // Create Methods
-const create = async (req, res) => {
+const createCategory = async (req, res) => {
 
     const { name, description, icon, color } = req?.body
 
@@ -23,7 +23,7 @@ const create = async (req, res) => {
 }
 
 // Update Methods
-const update = async (req, res) => {
+const updateCategory = async (req, res) => {
 
     const { name, description, icon, color, id } = req.body
 
@@ -34,10 +34,17 @@ const update = async (req, res) => {
 }
 
 // Delete Methods
-const deleteById = (req, res) => {
+const deleteCategoryById = (req, res) => {
     const { id } = req?.body
 
     Controller.deleteById(req, res, id)
 }
 
-module.exports = { getAll, getById, getByName, create, update, deleteById }
+module.exports = { 
+    getAllCategories,
+    getCategoryById,
+    getCategoryByName,
+    createCategory,
+    updateCategory,
+    deleteCategoryById
+}

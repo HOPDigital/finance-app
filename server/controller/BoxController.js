@@ -9,7 +9,7 @@ const UserModel = require('../model/UserModel').model
  * @param {Object} res - The response of express
  * @param {string} user_id - User ID to update
  */
-const get = async (req, res, user_id) => {
+const getBoxId = async (req, res, user_id) => {
 
     if (!user_id) { res?.status(401).send('No user ID'); return }
 
@@ -30,7 +30,7 @@ const get = async (req, res, user_id) => {
  * @param {string} user_id - The _id of the User document to add the MoneyBox to
  * @param {Object} fields - The fields and values of the MoneyBox to create
  */
-const create = async (req, res, user_id, fields) => {
+const createBox = async (req, res, user_id, fields) => {
 
     if (!user_id) { res?.status(401).send('No user ID'); return }
 
@@ -65,7 +65,7 @@ const create = async (req, res, user_id, fields) => {
  * @param {string} box_id - The _id of the MoneyBox subdocument to update
  * @param {Object} fields - The fields and values of the MoneyBox to update
  */
-const update = async (req, res, user_id, box_id, fields) => {
+const updateBox = async (req, res, user_id, box_id, fields) => {
 
     if (!(user_id && box_id)) { res?.status(401).send('No user ID'); return }
 
@@ -106,7 +106,7 @@ const update = async (req, res, user_id, box_id, fields) => {
  * @param {string} user_id - The _id of the User document that the MoneyBox belongs to
  * @param {string} box_id - The _id of the MoneyBox subdocument to delete
  */
-const remove = async (req, res, user_id, box_id) => {
+const deleteBox = async (req, res, user_id, box_id) => {
 
     const filter = { _id: user_id }
     const update = { $pull: { boxes: { _id: box_id } } }
@@ -126,5 +126,9 @@ const remove = async (req, res, user_id, box_id) => {
     }
 }
 
-
-module.exports = { create, get, update, remove }
+module.exports = {
+    getBoxId,
+    createBox,
+    updateBox,
+    deleteBox
+}
