@@ -9,7 +9,9 @@ const UserModel = require('../model/UserModel').model
  * @param {Object} res - The response of express
  * @param {string} user_id - User ID to update
  */
-const getBoxId = async (req, res, user_id) => {
+const getBoxesByUserId = async (req, res) => {
+
+    const user_id = req?.params.id
 
     if (!user_id) { res?.status(401).send('No user ID'); return }
 
@@ -30,18 +32,21 @@ const getBoxId = async (req, res, user_id) => {
  * @param {string} user_id - The _id of the User document to add the MoneyBox to
  * @param {Object} fields - The fields and values of the MoneyBox to create
  */
-const createBox = async (req, res, user_id, fields) => {
+const createBox = async (req, res) => {
+
+    const { user_id, fields } = req?.body
+    const { name } = fields
 
     if (!user_id) { res?.status(401).send('No user ID'); return }
 
-    if (!fields?.name) { res?.status(401).send('Missing required fields'); return }
+    if (!name) { res?.status(401).send('Missing required fields'); return }
 
     const user = await UserModel.findById(user_id)
 
     if (!user) { res?.status(409).send('No user found'); return }
 
     try {
-        const box = new MoneyBoxModel(fields)
+        const box = new MoneyBoxModel({ name, ...fields })
 
         user.boxes.push(box)
 
@@ -65,11 +70,14 @@ const createBox = async (req, res, user_id, fields) => {
  * @param {string} box_id - The _id of the MoneyBox subdocument to update
  * @param {Object} fields - The fields and values of the MoneyBox to update
  */
-const updateBox = async (req, res, user_id, box_id, fields) => {
+const updateBox = async (req, res) => {
+
+    const { user_id, box_id, fields } = req?.body
 
     if (!(user_id && box_id)) { res?.status(401).send('No user ID'); return }
 
-    if (fields?.name && fields.name === '') { res?.status(401).send('Missing required fields'); return }
+    if (!fields) { res?.status(401).send('Missing required fields'); return }
+    if ((fields?.name && fields.name === '')) { res?.status(401).send('Missing required fields'); return }
 
     const user = await UserModel.findById(user_id)
 
@@ -90,7 +98,6 @@ const updateBox = async (req, res, user_id, box_id, fields) => {
         res?.status(200).json({ message: 'Money box updated' });
 
     } catch (error) {
-
         console.log(error);
         res?.status(500).send('Error updating money box');
 
@@ -106,7 +113,9 @@ const updateBox = async (req, res, user_id, box_id, fields) => {
  * @param {string} user_id - The _id of the User document that the MoneyBox belongs to
  * @param {string} box_id - The _id of the MoneyBox subdocument to delete
  */
-const deleteBox = async (req, res, user_id, box_id) => {
+const deleteBox = async (req, res) => {
+
+    const { user_id, box_id } = req.body
 
     const filter = { _id: user_id }
     const update = { $pull: { boxes: { _id: box_id } } }
@@ -127,7 +136,7 @@ const deleteBox = async (req, res, user_id, box_id) => {
 }
 
 module.exports = {
-    getBoxId,
+    getBoxesByUserId,
     createBox,
     updateBox,
     deleteBox

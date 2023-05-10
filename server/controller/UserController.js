@@ -2,13 +2,17 @@ const UserModel = require('../model/UserModel').model
 const bcrypt = require('bcryptjs')
 const jwt = require('jsonwebtoken')
 
+const Erros = require('../services/AppErrors')
+const Success = require('../services/AppSuccess')
+const Errors = require('../services/AppErrors')
+
 const getUserById = async (req, res) => {
     const data = await UserModel.find({})
-    res.status(200).json(data)
+    res.status(Success.USER_FOUND.status).json({ ...Success.USER_FOUND, data })
 }
 
 const authenticateUser = (req, res) => {
-    
+
 }
 
 const createUser = async (req, res) => {
@@ -32,12 +36,12 @@ const createUser = async (req, res) => {
             && last_name
             && birth_date
             && country
-        )) { res.status(400).send('Missing required fields') }
+        )) { res.status(Errors.MISSING_FIELDS.status).json(Erros.MISSING_FIELDS) }
 
 
 
         const old_user = await UserModel.findOne({ email })
-        if (old_user) { res.status(409).send('User already exists'); return }
+        if (old_user) { res.status(Erros.USER_ALREADY_EXISTS.status).json(Errors.USER_ALREADY_EXISTS); return }
 
         const encrypted_password = await bcrypt.hash(password, 10)
 
@@ -62,7 +66,7 @@ const createUser = async (req, res) => {
         user.token = token
         console.log(user)
 
-        res.status(200).json(user)
+        res.status(Success.USER_CREATED.status).json({ ...Success.USER_CREATED, user })
     }
 
     catch (err) {

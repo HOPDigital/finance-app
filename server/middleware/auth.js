@@ -12,7 +12,7 @@ const requireAuth = (req, res, next) => {
         if (err) return res.status.send(500).json({ auth: false, message: 'Failed to authenticate token' })
 
         req.user_id = decoded.user_id
-        next?.(user_id)
+        next()
     })
 }
 

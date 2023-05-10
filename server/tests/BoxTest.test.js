@@ -3,7 +3,7 @@ const app = require('../server');
 const mongoose = require('mongoose');
 
 const user_id = new mongoose.Types.ObjectId('645aeaecdc5fbd2b808abd32'); // Generate a fake user ID
-const box_id = new mongoose.Types.ObjectId(); // Generate a fake box ID
+let box_id //= new mongoose.Types.ObjectId(); // Generate a fake box ID
 
 describe('BoxController', () => {
     describe('GET /boxes/:id', () => {
@@ -26,7 +26,9 @@ describe('BoxController', () => {
 
             const response = await request(app)
                 .post('/boxes/create')
-                .send({ id: user_id, ...fields });
+                .send({ user_id: user_id, fields });
+
+            box_id = response.body._id
 
             expect(response.statusCode).toBe(200);
             expect(response.body).toMatchObject(fields);
@@ -37,12 +39,13 @@ describe('BoxController', () => {
         it('should update an existing box in a user\'s account', async () => {
             const fields = {
                 name: 'Updated Test Box',
-                target: 200
+                target: 200,
+                fields: { name: 'Updated Box' }
             };
 
             const response = await request(app)
                 .patch('/boxes/update')
-                .send({ id: user_id, box_id: box_id, ...fields });
+                .send({ user_id, box_id, fields });
 
             expect(response.statusCode).toBe(200);
         });
