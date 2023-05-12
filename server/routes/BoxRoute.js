@@ -1,10 +1,10 @@
 const router = require('express').Router()
 const { getBoxesByUserId, createBox, updateBox, deleteBox } = require('../controller/BoxController')
 
-const requireAuth = require('../middleware/auth')
+const { requireAuth } = require('../middleware/auth')
 
 //Middleware
-//router.use(requireAuth)
+router.use(requireAuth)
 
 // -- Get boxes of user
 router.get('/:id', (req, res) => getBoxesByUserId(req, res))

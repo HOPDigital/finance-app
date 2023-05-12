@@ -10,6 +10,12 @@ const Success = {
         auth: true,
         message: 'User found',
         status: 200
+    },
+
+    TOKEN_CREATED: {
+        auth: true,
+        message: 'Token created successfuly',
+        status: 200
     }
 }
 

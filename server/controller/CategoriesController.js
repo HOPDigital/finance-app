@@ -40,7 +40,7 @@ const deleteCategoryById = (req, res) => {
     Controller.deleteById(req, res, id)
 }
 
-module.exports = { 
+module.exports = {
     getAllCategories,
     getCategoryById,
     getCategoryByName,

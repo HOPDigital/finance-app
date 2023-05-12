@@ -31,7 +31,7 @@ const Errors = {
     },
 
     TOKEN_AUTHENTICATE_ERROR: {
-        auth: false,
+        success: false,
         message: 'Failed to authenticate token',
         status: 500
     },
@@ -44,7 +44,8 @@ const Errors = {
 
     NO_USER_FOUND: {
         success: false,
-        
+        status: 401,
+        message: 'No user found'
     }
 }
 

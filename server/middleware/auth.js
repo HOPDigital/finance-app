@@ -12,8 +12,23 @@ const requireAuth = (req, res, next) => {
         if (err) return res.status.send(500).json({ auth: false, message: 'Failed to authenticate token' })
 
         req.user_id = decoded.user_id
+
         next()
     })
 }
 
-module.exports = requireAuth
+const signUser = user => {
+    
+    if (!user) return undefined
+
+    jwt.sign(
+        { user_id: user._id, email: user.email },
+        process.env.SECRET,
+        { expiresIn: '2h' }
+    )
+}
+
+
+
+
+module.exports = { requireAuth, signUser }
