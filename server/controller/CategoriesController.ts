@@ -1,18 +1,20 @@
-const CategoryModel = require('../model/CategoryModel').model
+import { model } from '../model/CategoryModel'
+
+import { Request, Response } from 'express'
 const DefaultController = require('./DefaultController')
 
-const Controller = new DefaultController(CategoryModel)
+const Controller = new DefaultController(model)
 
 // Get Methods
-const getAllCategories = async (req, res) => Controller.getAll(req, res)
+const getAllCategories = async (req: Request, res: Response) => Controller.getAll(req, res)
 
-const getCategoryById = (id, callback) => { }
+const getCategoryById = (id: string, callback: Function) => { }
 
-const getCategoryByName = (name, callback) => { }
+const getCategoryByName = (name: string, callback: Function) => { }
 
 
 // Create Methods
-const createCategory = async (req, res) => {
+const createCategory = async (req: Request, res: Response) => {
 
     const { name, description, icon, color } = req?.body
 
@@ -23,7 +25,7 @@ const createCategory = async (req, res) => {
 }
 
 // Update Methods
-const updateCategory = async (req, res) => {
+const updateCategory = async (req: Request, res: Response) => {
 
     const { name, description, icon, color, id } = req.body
 
@@ -34,7 +36,7 @@ const updateCategory = async (req, res) => {
 }
 
 // Delete Methods
-const deleteCategoryById = (req, res) => {
+const deleteCategoryById = (req: Request, res: Response) => {
     const { id } = req?.body
 
     Controller.deleteById(req, res, id)

@@ -1,6 +1,7 @@
 const mongoose = require('mongoose')
 
-const CardModel = require('./CardModel').schema
+import { schema as CardSchema } from './CardModel'
+
 const FixedBillsModel = require('./FixedBills').schema
 const TransactionModel = require('./TransactionsModel').schema
 const FixedIncomes = require('./FixedIncomes').schema
@@ -14,7 +15,7 @@ const schema = new mongoose.Schema({
     currency: String,
     background_image: String,
     box_image: String,
-    card: [CardModel],
+    card: [CardSchema],
     transactions: [TransactionModel],
     fixed_bills: [FixedBillsModel],
     fixed_incomes: [FixedIncomes]

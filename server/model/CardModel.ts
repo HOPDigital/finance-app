@@ -1,5 +1,6 @@
-const mongoose = require('mongoose')
-const schema = new mongoose.Schema({
+import mongoose from "mongoose"
+
+export const schema = new mongoose.Schema({
     flag: { type: String, required: true },
     name: { type: String, required: true },
     number: { type: Number, required: true },
@@ -7,5 +8,4 @@ const schema = new mongoose.Schema({
     balance: { type: Number, default: 0 }
 })
 
-const model = mongoose.model('card', schema)
-module.exports = { model, schema }
+export const model = mongoose.model('card', schema)
