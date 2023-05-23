@@ -90,7 +90,7 @@ const updateBox = async (req, res) => {
     try {
         const result = await UserModel.updateOne(filter, update);
 
-        if (result.nModified === 0) {
+        if (result.modifiedCount === 0) {
             res?.status(409).send('No user or money box found');
             return;
         }

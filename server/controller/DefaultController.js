@@ -1,4 +1,4 @@
-class Controller {
+export class Controller {
 
     constructor(model) {
         this.model = model
@@ -59,6 +59,3 @@ class Controller {
 
     }
 }
-
-
-module.exports = Controller

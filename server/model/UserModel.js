@@ -20,3 +20,5 @@ const schema = new mongoose.Schema({
 
 const model = mongoose.model('user', schema)
 module.exports = { model, schema }
+
+export { model, schema }
