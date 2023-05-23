@@ -18,3 +18,4 @@ const schema = new mongoose.Schema({
 const model = mongoose.model('company', schema)
 
 module.exports = { schema, model }
+export { model, schema }

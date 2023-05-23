@@ -50,3 +50,4 @@ const Errors = {
 }
 
 module.exports = Errors
+export default Errors
