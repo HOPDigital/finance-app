@@ -1,6 +1,6 @@
 interface Discount { }
 
-export default interface FixedIncome {
+export default interface IFixedIncome {
     name: string,
     value: number,
     day: number,

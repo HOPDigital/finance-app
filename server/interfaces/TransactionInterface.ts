@@ -1,7 +1,7 @@
 import Category from "./Category";
 
 
-export default interface Transaction {
+export default interface ITransaction {
     value: number,
     currency: string,
     type: string,

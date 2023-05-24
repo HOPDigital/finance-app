@@ -3,10 +3,10 @@ import FixedBill from "./FixedBill";
 import FixedIncome from "./FixedIncome";
 import Transaction from "./TransactionInterface";
 
-export default interface Box {
+export default interface IBox {
     name: string,
     description?: string,
-    created_at: string,
+    created_at: Date,
     target?: number,
     balance?: number,
     currency?: string,

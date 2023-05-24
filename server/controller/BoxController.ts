@@ -1,6 +1,7 @@
-const MoneyBoxModel = require('../model/MoneyBox').model
-const UserModel = require('../model/UserModel').model
+import { Response, Request } from 'express'
 
+import { model as MoneyBoxModel } from '../model/MoneyBox'
+import { model as UserModel } from '../model/UserModel'
 
 /**
  * Get Boxes of User
@@ -9,7 +10,7 @@ const UserModel = require('../model/UserModel').model
  * @param {Object} res - The response of express
  * @param {string} user_id - User ID to update
  */
-const getBoxesByUserId = async (req, res) => {
+export const getBoxesByUserId = async (req: Request, res: Response) => {
 
     const user_id = req?.params.id
 
@@ -32,7 +33,7 @@ const getBoxesByUserId = async (req, res) => {
  * @param {string} user_id - The _id of the User document to add the MoneyBox to
  * @param {Object} fields - The fields and values of the MoneyBox to create
  */
-const createBox = async (req, res) => {
+export const createBox = async (req: Request, res: Response) => {
 
     const { user_id, fields } = req?.body
     const { name } = fields
@@ -48,7 +49,7 @@ const createBox = async (req, res) => {
     try {
         const box = new MoneyBoxModel({ name, ...fields })
 
-        user.boxes.push(box)
+        user?.boxes?.push(box)
 
         await user.save()
             .then(() => res?.status(200).json(box))
@@ -70,7 +71,7 @@ const createBox = async (req, res) => {
  * @param {string} box_id - The _id of the MoneyBox subdocument to update
  * @param {Object} fields - The fields and values of the MoneyBox to update
  */
-const updateBox = async (req, res) => {
+export const updateBox = async (req: Request, res: Response) => {
 
     const { user_id, box_id, fields } = req?.body
 
@@ -113,7 +114,7 @@ const updateBox = async (req, res) => {
  * @param {string} user_id - The _id of the User document that the MoneyBox belongs to
  * @param {string} box_id - The _id of the MoneyBox subdocument to delete
  */
-const deleteBox = async (req, res) => {
+export const deleteBox = async (req: Request, res: Response) => {
 
     const { user_id, box_id } = req.body
 
@@ -123,7 +124,7 @@ const deleteBox = async (req, res) => {
     try {
         const result = await UserModel.updateOne(filter, update);
 
-        if (result.nModified === 0) {
+        if (result.modifiedCount === 0) {
             res?.status(409).send('No user or money box found');
             return;
         }
@@ -133,11 +134,4 @@ const deleteBox = async (req, res) => {
         console.log(error);
         res?.status(500).send('Error deleting money box');
     }
-}
-
-module.exports = {
-    getBoxesByUserId,
-    createBox,
-    updateBox,
-    deleteBox
 }

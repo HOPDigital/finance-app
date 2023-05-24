@@ -1,4 +1,4 @@
-export default interface FixedBill {
+export default interface IFixedBill {
     name: string,
     value: number,
     interval: number,

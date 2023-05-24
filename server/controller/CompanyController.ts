@@ -1,17 +1,19 @@
-import Success from "../services/AppSuccess"
-import Errors from "../services/AppErrors"
+import { Success } from "../services/AppSuccess"
+import { Errors } from "../services/AppErrors"
 
 import { model as UserModel } from "../model/UserModel"
 import { model as CompanyModel } from "../model/CompanyModel"
 
 import { Controller as DefaultController } from "./DefaultController"
 
+import { Request, Response } from "express"
+
 
 const Controller = new DefaultController(CompanyModel)
 
-const getAllCompanies = async (req: any, res: any) => Controller.getAll(req, res)
+export const getAllCompanies = async (req: Request, res: Response) => Controller.getAll(req, res)
 
-const getCompanyByUserId = async (req: any, res: any) => {
+export const getCompanyByUserId = async (req: Request, res: Response) => {
 
     const user_id = req?.params.id
 
@@ -27,7 +29,7 @@ const getCompanyByUserId = async (req: any, res: any) => {
 
 }
 
-const createCompany = async (req: any, res: any) => {
+export const createCompany = async (req: Request, res: Response) => {
 
     const { user_id, fields } = req?.body
     const { name } = fields
@@ -41,45 +43,45 @@ const createCompany = async (req: any, res: any) => {
     try {
         const box = new CompanyModel({ name, ...fields })
 
-        user.boxes.push(box)
+        user?.companies?.push(box)
 
         await user.save()
-            .then(() => res?.status(200).json(box))
+            .then(() => res?.status(Success.COMPANY_CREATED.status).json({ ...Success.COMPANY_CREATED, data: box }))
 
     } catch (error) {
         console.log(error)
-        res?.status(500).send('Error creating box')
+        res?.status(Errors.COMPANY_NOT_CREATED.status).json(Errors.COMPANY_NOT_CREATED)
     }
 
-    const updateCompany = async (req: any, res: any) => {
+}
 
-        const { user_id, company_id, fields } = req?.body
+export const updateCompany = async (req: Request, res: Response) => {
 
-        if (!(user_id && company_id && !fields && fields.name && fields.name !== '')) { res?.status(Errors.MISSING_FIELDS.status).json(Errors.MISSING_FIELDS); return }
+    const { user_id, company_id, fields } = req?.body
 
-        const user = await UserModel.findById(user_id)
+    if (!(user_id && company_id && !fields && fields.name && fields.name !== '')) { res?.status(Errors.MISSING_FIELDS.status).json(Errors.MISSING_FIELDS); return }
 
-        if (!user) { res?.status(409).send('No user found'); return }
+    const user = await UserModel.findById(user_id)
+
+    if (!user) { res?.status(Errors.NO_USER_FOUND.status).json(Errors.NO_USER_FOUND); return }
 
 
-        const filter = { _id: user_id, "companies._id": company_id };
-        const update = { $set: fields };
+    const filter = { _id: user_id, "companies._id": company_id };
+    const update = { $set: fields };
 
-        try {
-            const result = await UserModel.updateOne(filter, update);
+    try {
+        const result = await UserModel.updateOne(filter, update);
 
-            if (result.modifiedCount === 0) {
-                res?.status(409).send('No user or money box found');
-                return;
-            }
-
-            res?.status(200).json({ message: 'Money box updated' });
-
-        } catch (error) {
-            console.log(error);
-            res?.status(500).send('Error updating money box');
-
+        if (result.modifiedCount === 0) {
+            res?.status(Errors.NO_DATA_FOUND.status).json(Errors.NO_DATA_FOUND);
+            return;
         }
-    }
 
+        res?.status(Success.COMPANY_UPDATED.status).json(Success.COMPANY_UPDATED);
+
+    } catch (error) {
+        console.log(error);
+        res?.status(Errors.COMPANY_NOT_UPDATED.status).json(Errors.COMPANY_NOT_UPDATED);
+
+    }
 }

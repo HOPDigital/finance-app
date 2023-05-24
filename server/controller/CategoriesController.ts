@@ -1,6 +1,7 @@
 import { model } from '../model/CategoryModel'
 
 import { Request, Response } from 'express'
+
 const DefaultController = require('./DefaultController')
 
 const Controller = new DefaultController(model)

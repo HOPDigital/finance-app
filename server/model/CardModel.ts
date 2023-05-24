@@ -1,6 +1,9 @@
 import mongoose from "mongoose"
 
-export const schema = new mongoose.Schema({
+import ICard from "../interfaces/CardInterface"
+
+
+export const schema = new mongoose.Schema<ICard>({
     flag: { type: String, required: true },
     name: { type: String, required: true },
     number: { type: Number, required: true },
@@ -8,4 +11,4 @@ export const schema = new mongoose.Schema({
     balance: { type: Number, default: 0 }
 })
 
-export const model = mongoose.model('card', schema)
+export const model = mongoose.model<ICard>('card', schema)

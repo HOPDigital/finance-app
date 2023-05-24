@@ -1,8 +1,9 @@
-const mongoose = require('mongoose')
+import mongoose from "mongoose"
 
-const SharedUser = require('./SharedUser').schema
+import ICompany from "../interfaces/Company"
+import { schema as SharedUser } from "./SharedUser"
 
-const schema = new mongoose.Schema({
+const schema = new mongoose.Schema<ICompany>({
     public_id: String,
     name: { type: String, required: true },
     description: String,
@@ -15,7 +16,6 @@ const schema = new mongoose.Schema({
 
 })
 
-const model = mongoose.model('company', schema)
+const model = mongoose.model<ICompany>('company', schema)
 
-module.exports = { schema, model }
 export { model, schema }

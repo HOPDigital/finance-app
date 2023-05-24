@@ -7,6 +7,7 @@
   "author": "Hop-digital",
   "license": "MIT",
   "dependencies": {
+    "@types/jsonwebtoken": "^9.0.2",
     "@types/mongoose": "^5.11.97",
     "bcryptjs": "^2.4.3",
     "body-parser": "^1.20.2",

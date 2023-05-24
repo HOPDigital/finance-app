@@ -1,4 +1,5 @@
-const Errors = {
+import IError from "../interfaces/AppInterfaces/Error"
+export const Errors: { [key: string]: IError } = {
 
     INTERNAL_ERROR: {
         success: false,
@@ -15,13 +16,21 @@ const Errors = {
     NO_TOKEN_ERROR: {
         auth: false,
         message: 'No Token Provided',
-        status: 401
+        status: 401,
+        success: false
+    },
+    FAILED_TO_AUTHENTICATE_TOKEN: {
+        auth: false,
+        success: false,
+        status: 500,
+        message: 'Failed to authenticate token'
     },
 
     USER_ALREADY_EXISTS: {
         auth: false,
         message: 'User already exists',
-        status: 409
+        status: 409,
+        success: false
     },
 
     PERMISSION_ERROR: {
@@ -46,8 +55,24 @@ const Errors = {
         success: false,
         status: 401,
         message: 'No user found'
+    },
+
+    NO_DATA_FOUND: {
+        success: false,
+        status: 409,
+        message: "No data found to be changed"
+    },
+
+    COMPANY_NOT_CREATED: {
+        success: false,
+        status: 500,
+        message: 'Error creating company'
+    },
+    COMPANY_NOT_UPDATED: {
+        success: false,
+        status: 500,
+        message: 'Error updating company'
     }
 }
 
-module.exports = Errors
-export default Errors
+

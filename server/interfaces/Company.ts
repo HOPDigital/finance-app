@@ -1,20 +1,13 @@
-interface SharedUser {
-    user_id: string,
-    access_level: number
-}
+import ISharedData from "./SharedData"
 
-interface SharedData {
-    is_shared: boolean,
-    users?: Array<SharedUser>
-}
 
-export default interface Company {
+export default interface ICompany {
     public_id?: string,
     name: string,
     description?: string,
     logotype?: string,
     hero?: string,
     shared_data: {
-        is_shared?: SharedData
+        is_shared?: ISharedData
     }
 }

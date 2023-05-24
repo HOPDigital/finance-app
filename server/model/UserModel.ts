@@ -1,9 +1,11 @@
-const mongoose = require('mongoose')
+import mongoose from "mongoose"
 
-const CompanySchema = require('./CompanyModel').schema
-const MoneyBox = require('./MoneyBox').schema
+import IUser from "../interfaces/UserInterface"
 
-const schema = new mongoose.Schema({
+import { schema as CompanySchema } from './CompanyModel'
+import { schema as MoneyBoxSchema } from './MoneyBox'
+
+export const schema = new mongoose.Schema<IUser>({
     first_name: { type: String, required: true }, // André de Lara,
     last_name: { type: String, required: true },
     password: { type: String, required: true },
@@ -13,12 +15,9 @@ const schema = new mongoose.Schema({
     city: String, // São Bernardo do Campo
     country: { type: String, required: true }, // Brazil
     profile_picture: String, // base64,
-    created_at: { type: Date, default: new Date().toISOString() },
+    created_at: { type: Date, default: new Date() },
     companies: [CompanySchema],
-    boxes: [MoneyBox]
+    boxes: [MoneyBoxSchema]
 })
 
-const model = mongoose.model('user', schema)
-module.exports = { model, schema }
-
-export { model, schema }
+export const model = mongoose.model<IUser>('user', schema)
