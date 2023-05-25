@@ -72,6 +72,31 @@ export const Errors: { [key: string]: IError } = {
         success: false,
         status: 500,
         message: 'Error updating company'
+    },
+    ERROR_RETRIEVING_DATA: {
+        success: false,
+        status: 500,
+        message: 'No data found or error retrieving data'
+    },
+    ERROR_CREATING_DATA: {
+        success: false,
+        status: 500,
+        message: 'Error creating data'
+    },
+    NO_ID_RECEIVED: {
+        success: false,
+        status: 409,
+        message: 'No ID recieved'
+    },
+    ERROR_UPDATING_DATA: {
+        success: false,
+        status: 500,
+        message: 'Error updating data'
+    },
+    ERROR_DELETING_DATA: {
+        success: false,
+        status: 500,
+        message: 'Error deleting data'
     }
 }
 

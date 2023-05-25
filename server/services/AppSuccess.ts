@@ -35,5 +35,25 @@ export const Success: { [key: string]: ISuccess } = {
         success: true,
         status: 200,
         message: 'Company updated with success'
+    },
+    DATA_GATHERED: {
+        success: true,
+        status: 200,
+        message: 'Data Gathered'
+    },
+    DATA_CREATED: {
+        success: true,
+        status: 200,
+        message: 'Data Created'
+    },
+    DATA_UPDATED: {
+        success: true,
+        status: 200,
+        message: 'Data Updated'
+    },
+    DATA_DELETED: {
+        success: true,
+        status: 200,
+        message: 'Data Deleted'
     }
 }
