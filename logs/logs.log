@@ -1,13 +1,1 @@
-{"level":"info","message":"SERVER IS UP"}
-{"level":"info","message":"SERVER IS UP"}
-{"level":"info","message":"connecting to database","timestamp":"2023-05-26T02:15:23.523Z"}
-{"level":"info","message":"SERVER IS UP","timestamp":"2023-05-26T02:15:23.531Z"}
-{"level":"info","message":"connected to database","timestamp":"2023-05-26T02:15:23.797Z"}
-{"level":"info","message":"connecting to database","timestamp":"2023-05-26T02:20:32.289Z"}
-{"level":"info","message":"server is up on port: 8882","timestamp":"2023-05-26T02:20:32.298Z"}
-{"level":"info","message":"connected to database","timestamp":"2023-05-26T02:20:32.692Z"}
-{"level":"info","message":"mongodb+srv://hop-admin:5bAvyvqWcs6DsnP5@cluster.cao8znq.mongodb.net/?retryWrites=true&w=majority","timestamp":"2023-05-26T02:20:32.692Z"}
-{"level":"info","message":"connecting to database","timestamp":"2023-05-26T02:22:56.130Z"}
-{"level":"info","message":"server is up on port: 8882","timestamp":"2023-05-26T02:22:56.139Z"}
-{"level":"info","message":"connected to database","timestamp":"2023-05-26T02:22:56.616Z"}
-{"level":"info","message":"mongodb+srv://hop-admin:5bAvyvqWcs6DsnP5@cluster.cao8znq.mongodb.net/?retryWrites=true&w=majority","timestamp":"2023-05-26T02:22:56.617Z"}
+
