@@ -3,7 +3,10 @@ import FixedBill from "./FixedBill";
 import FixedIncome from "./FixedIncome";
 import Transaction from "./TransactionInterface";
 
+import { Types } from "mongoose";
+
 export default interface IBox {
+    _id: Types.ObjectId,
     name: string,
     description?: string,
     created_at: Date,

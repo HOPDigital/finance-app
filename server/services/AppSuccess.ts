@@ -1,7 +1,7 @@
-import ISuccess from "../interfaces/AppInterfaces/Success"
+import IMessage from "../interfaces/AppInterfaces/Messages"
 
 
-export const Success: { [key: string]: ISuccess } = {
+export const Success: { [key: string]: IMessage } = {
 
     USER_CREATED: {
         success: true,

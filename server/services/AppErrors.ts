@@ -1,5 +1,5 @@
-import IError from "../interfaces/AppInterfaces/Error"
-export const Errors: { [key: string]: IError } = {
+import IMessage from "../interfaces/AppInterfaces/Messages"
+export const Errors: { [key: string]: IMessage } = {
 
     INTERNAL_ERROR: {
         success: false,
@@ -97,6 +97,11 @@ export const Errors: { [key: string]: IError } = {
         success: false,
         status: 500,
         message: 'Error deleting data'
+    },
+    INCORRECT_FIELDS: {
+        success: false,
+        status: 409,
+        message: 'Parameters / Fields are incorrect'
     }
 }
 
