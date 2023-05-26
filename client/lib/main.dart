@@ -1,7 +1,5 @@
 import 'package:flutter/material.dart';
-
-// Pages
-import 'package:flutter_application/pages/boarding/boarding_screen.dart';
+import 'package:flutter_application/pages/splash_intro_screen.dart';
 
 void main() => runApp(const MainApp());
 
@@ -15,7 +13,7 @@ class MainApp extends StatelessWidget {
       theme: ThemeData(
         useMaterial3: true,
       ),
-      home: const OnBoardingScreen(),
+      home: const SplashIntroScreen(),
     );
   }
 }

@@ -12,7 +12,7 @@ class BoardingLayout extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       body: Container(
-        padding: const EdgeInsets.symmetric(vertical: 30),
+        padding: const EdgeInsets.symmetric(vertical: 30, horizontal: 15),
         decoration: BoxDecoration(color: AppColors.blueColor),
         child: column,
       ),

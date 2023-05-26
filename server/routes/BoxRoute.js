@@ -1,16 +1,21 @@
 const router = require('express').Router()
-const { create, get, update, remove } = require('../controller/BoxController')
+const { getBoxesByUserId, createBox, updateBox, deleteBox } = require('../controller/BoxController')
+
+const { requireAuth } = require('../middleware/auth')
+
+//Middleware
+router.use(requireAuth)
 
 // -- Get boxes of user
-router.get('/:id', (req, res) => get(req, res, req?.params.id))
+router.get('/:id', getBoxesByUserId)
 
 // -- Create a new box in user
-router.post('/create', (req, res) => create(req, res, req?.body.id, fields = req?.body))
+router.post('/create', createBox)
 
 // -- Update a existing box
-router.patch('/update', (req, res) => update(req, res, req?.body.id, req?.body.box_id, req?.body))
+router.patch('/update', updateBox)
 
 // -- Remove a existing box
-router.delete('/delete', (req, res) => remove(req, res, req?.body.user_id, req?.body.box_id))
+router.delete('/delete', deleteBox)
 
 module.exports = router

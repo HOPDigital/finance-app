@@ -1,12 +1,16 @@
-const app = require('express').Router()
-const { getAll, getById, getByName, create, update, deleteById } = require('../controller/CategoriesController')
+const router = require('express').Router()
+const { getAllCategories, getCategoryById, getCategoryByName, createCategory, updateCategory, deleteCategoryById, } = require('../controller/CategoriesController')
 
-app.get('/', (req, res) => getAll(req, res))
+router.get('/', getAllCategories)
 
-app.post('/create', (req, res) => create(req, res))
+router.get('/:id', getCategoryById)
 
-app.patch('/update', (req, res) => update(req, res))
+router.get('/:name', getCategoryByName)
 
-app.delete('/delete', (req, res) => deleteById(req, res))
+router.post('/create', createCategory)
 
-module.exports = app
+router.patch('/update', updateCategory)
+
+router.delete('/delete', deleteCategoryById)
+
+module.exports = router
