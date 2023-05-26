@@ -38,42 +38,28 @@ export const getTransactionsByBoxId = async (req: Request, res: Response) => {
 
     const { box_id } = req?.params
 
-    if (!box_id) return handle(ERRORS.MISSING_FIELDS, res)
-
-    const box = (await BoxModel.find({ _id: box_id }))[0]
-
-    if (!box) return handle(ERRORS.NO_DATA_FOUND, res)
-
-    const transactions = box?.transactions
-
-    if (!transactions) return handle(ERRORS.NO_DATA_FOUND, res)
-
-    handle(SUCCESS.DATA_GATHERED, res, transactions)
+    await DefaultController
+        .getNested(req, res,
+            {
+                parent_field: 'transactions',
+                parent_model: BoxModel,
+                parent_id: box_id,
+            }
+        )
 }
 
 
 export const createTransaction = async (req: Request, res: Response) => {
-    const box_id = req?.body.box_id
+    const { box_id, fields } = req?.body
 
-    if (!box_id) return handle(ERRORS.NO_ID_RECEIVED, res)
-
-    try {
-        const fields: ITransaction = req?.body.fields
-
-        const box = await BoxModel.findById(box_id)
-
-        if (!box) return handle(ERRORS.NO_DATA_FOUND, res)
-
-        const transaction = new TransactionModel(fields)
-
-        box?.transactions?.push(transaction)
-
-        await box?.save()
-            .then(() => handle(SUCCESS.DATA_CREATED, res, transaction.toObject))
-    }
-    catch (error) {
-        return handle(ERRORS.INCORRECT_FIELDS, res)
-    }
+    await DefaultController
+        .createNested(req, res,
+            {
+                validation: !(box_id && fields),
+                parent_model: BoxModel,
+                parent_field: 'transactions'
+            }
+        )
 }
 
 export const updateTransaction = async (req: Request, res: Response) => {

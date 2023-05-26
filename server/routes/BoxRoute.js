@@ -7,15 +7,15 @@ const { requireAuth } = require('../middleware/auth')
 router.use(requireAuth)
 
 // -- Get boxes of user
-router.get('/:id', (req, res) => getBoxesByUserId(req, res))
+router.get('/:id', getBoxesByUserId)
 
 // -- Create a new box in user
-router.post('/create', (req, res) => createBox(req, res))
+router.post('/create', createBox)
 
 // -- Update a existing box
-router.patch('/update', (req, res) => updateBox(req, res))
+router.patch('/update', updateBox)
 
 // -- Remove a existing box
-router.delete('/delete', (req, res) => deleteBox(req, res))
+router.delete('/delete', deleteBox)
 
 module.exports = router

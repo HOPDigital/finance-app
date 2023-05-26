@@ -9,9 +9,14 @@ import { InterfaceType } from "typescript"
 
 interface INest {
     parent_model: Model<any>,
-    validation: boolean,
-    parent_field: string
+    validation?: boolean,
+    parent_field: string,
 }
+
+interface INestStrict extends INest {
+    parent_id: string
+}
+
 export class Controller {
 
     model: Model<any>
@@ -41,6 +46,24 @@ export class Controller {
         return handle(SUCCESS.DATA_GATHERED, res)
     }
 
+    getNested = async (req: Request, res: Response, fields: INestStrict) => {
+        const { parent_field, parent_model, validation, parent_id } = fields
+
+        if (!(parent_field && parent_model && parent_id)) return handle(ERRORS.MISSING_FIELDS, res)
+
+        if (validation) return handle(ERRORS.ERROR_RETRIEVING_DATA, res)
+
+        const parent = (await parent_model.find({ _id: parent_id }))[0]
+
+        if (!parent) return handle(ERRORS.NO_DATA_FOUND, res)
+
+        const nest = parent?.[parent_field]
+
+        if (!nest) return handle(ERRORS.NO_DATA_FOUND, res)
+
+        handle(SUCCESS.DATA_GATHERED, res, nest)
+    }
+
     // Create Methods
     create = async (req: Request, res: Response, fields: Object, validation: boolean) => {
 
@@ -51,10 +74,13 @@ export class Controller {
             .catch((err: any) => res.status(Errors.ERROR_CREATING_DATA.status).json(Errors.ERROR_CREATING_DATA))
     }
 
-    createNested = async (req: Request, res: Response, { validation, parent_model }: INest) => {
+    createNested = async (req: Request, res: Response, parameters: INest) => {
+        const { validation, parent_model } = parameters
         const { parent_id, fields, parent_field } = req?.body
 
         if (!parent_id) return handle(ERRORS.NO_ID_RECEIVED, res)
+
+        if (validation) return handle(ERRORS.ERROR_CREATING_DATA, res)
 
         try {
             const parent = await parent_model.findById(parent_id)
