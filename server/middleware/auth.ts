@@ -37,4 +37,4 @@ const signUser = (user: IUser) => {
 
 
 
-module.exports = { requireAuth, signUser }
+export { requireAuth, signUser }

@@ -18,3 +18,7 @@ export default interface IUser {
     companies?: Array<Company>,
     boxes?: Array<Box>
 }
+
+export interface IUserToken extends IUser {
+    token: string
+}

@@ -5,7 +5,6 @@ import { Request, Response } from "express"
 import { Errors } from "../services/AppErrors"
 import { Success } from "../services/AppSuccess"
 import handle, { ERRORS, SUCCESS } from "../services/Messages"
-import { InterfaceType } from "typescript"
 
 interface INest {
     parent_model: Model<any>,
