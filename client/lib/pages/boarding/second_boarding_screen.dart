@@ -3,7 +3,6 @@ import 'package:flutter_application/layouts/boarding_layout.dart';
 
 // Widgets
 import '../../widgets/app_large_text.dart';
-import '../../widgets/app_screen_title.dart';
 
 class SecondBoardingScreen extends StatelessWidget {
   const SecondBoardingScreen({super.key});
@@ -14,21 +13,7 @@ class SecondBoardingScreen extends StatelessWidget {
       column: Column(
         mainAxisAlignment: MainAxisAlignment.spaceBetween,
         children: [
-          AppScreenTitle(
-            text: 'What\'s new',
-            leftButton: IconButton(
-              onPressed: () => {},
-              icon: const Icon(
-                Icons.arrow_back_ios,
-                size: 20,
-                color: Colors.white,
-              ),
-            ),
-            rightButton: const Text(
-              'Skip',
-              style: TextStyle(color: Colors.white),
-            ),
-          ),
+          const SizedBox(),
           Container(
             height: 240,
             padding: const EdgeInsets.symmetric(horizontal: 20),
