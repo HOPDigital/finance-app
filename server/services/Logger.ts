@@ -11,7 +11,7 @@ const logger = winston.createLogger({
     ),
     transports: [
         new winston.transports.Console(),
-        new winston.transports.File({ filename: '../logs/logs.log' })
+        new winston.transports.File({ filename: './logs/logs.log' })
     ]
 })
 
