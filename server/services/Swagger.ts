@@ -2,25 +2,25 @@ const swaggerJsdoc = require("swagger-jsdoc")
 
 const options = {
     definition: {
-        openapi: "3.1.0",
+        swagger: "2.0",
         info: {
-            title: "LogRocket Express API with Swagger",
+            title: "Documentation for Finapp API",
             version: "0.1.0",
             description:
-                "This is a simple CRUD API application made with Express and documented with Swagger",
+                "Follow our project at: https://github.com/HOPDigital/finance-app",
             license: {
                 name: "MIT",
                 url: "https://spdx.org/licenses/MIT.html",
             },
             contact: {
-                name: "LogRocket",
-                url: "https://logrocket.com",
+                name: "Hop Digital",
+                url: "https://hopdigital.dev",
                 email: "info@email.com",
             },
         },
         servers: [
             {
-                url: "http://localhost:3000",
+                url: "http://localhost:9000",
             },
         ],
     },

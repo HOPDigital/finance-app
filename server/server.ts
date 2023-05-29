@@ -8,6 +8,8 @@ const UserRoute = require('./routes/UserRoute')
 const MoneyBoxRoute = require('./routes/BoxRoute')
 const CategoryRoute = require('./routes/CategoriesRoute')
 
+import { Request, Response } from "express"
+
 const morgan = require('morgan')
 
 const swaggerUi = require("swagger-ui-express");
@@ -25,11 +27,12 @@ if (!(SERVER_PORT && MONGO_URI)) {
     process.exit(1)
 }
 
-app.use(morgan('combined'))
+/* app.use(morgan('combined')) */
 app.use(logMiddleWare)
 
 app.use(cors())
 app.use(express.json())
+
 
 app.use('/user', UserRoute)
 app.use('/boxes', MoneyBoxRoute)
@@ -40,6 +43,8 @@ app.use("/api-docs", swaggerUi.serve, swaggerUi.setup(specs, { explorer: true })
 app.listen(SERVER_PORT)
     .on('listening', () => logger.info('server is up on port: ' + SERVER_PORT))
 
+
+app.get('/', (req: Request, res: Response) => res.send('Hello Finapp'))
 
 connectToDataBase(MONGO_URI)
 
