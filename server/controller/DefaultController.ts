@@ -99,7 +99,7 @@ export class Controller {
     }
 
     // Update Methods
-    update = async (req: Request, res: Response, id: ObjectId, fields: Object, validation: boolean) => {
+    update = async (req: Request, res: Response, id: ObjectId | string, fields: Object, validation?: boolean) => {
 
         if (!id) { res.status(Errors.NO_ID_RECEIVED.status).json(Errors.NO_ID_RECEIVED); return }
         if (validation) { res?.status(Errors.MISSING_FIELDS.status).json(Errors.MISSING_FIELDS); return }
@@ -117,7 +117,7 @@ export class Controller {
     }
 
 
-    deleteById = async (req: Request, res: Response, id: ObjectId) => {
+    deleteById = async (req: Request, res: Response, id: ObjectId | string) => {
         if (!id) { res.status(Errors.NO_ID_RECEIVED.status).json(Errors.NO_ID_RECEIVED); return }
 
         await this.model.findByIdAndDelete(id)

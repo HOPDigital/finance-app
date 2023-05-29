@@ -10,6 +10,10 @@ const CategoryRoute = require('./routes/CategoriesRoute')
 
 const morgan = require('morgan')
 
+const swaggerUi = require("swagger-ui-express");
+
+import { specs } from "./services/Swagger"
+
 const app = express()
 require('dotenv').config()
 
@@ -30,6 +34,8 @@ app.use(express.json())
 app.use('/user', UserRoute)
 app.use('/boxes', MoneyBoxRoute)
 app.use('/categories', CategoryRoute)
+
+app.use("/api-docs", swaggerUi.serve, swaggerUi.setup(specs, { explorer: true }));
 
 app.listen(SERVER_PORT)
     .on('listening', () => logger.info('server is up on port: ' + SERVER_PORT))
