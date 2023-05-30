@@ -21,4 +21,4 @@ router.patch('/:id', updateUser)
 // - Delete user
 router.delete('/:id', deleteUser)
 
-module.exports = router
+export default router

@@ -1,7 +1,7 @@
 const router = require('express').Router()
 const { getBoxesByUserId, createBox, updateBox, deleteBox } = require('../controller/BoxController')
 
-const { requireAuth } = require('../middleware/auth')
+import { requireAuth } from "../middleware/auth"
 
 //Middleware
 router.use(requireAuth)
@@ -18,4 +18,4 @@ router.patch('/update', updateBox)
 // -- Remove a existing box
 router.delete('/delete', deleteBox)
 
-module.exports = router
+export default router
