@@ -36,7 +36,7 @@ export const Errors: { [key: string]: IMessage } = {
     PERMISSION_ERROR: {
         success: false,
         message: 'Error, you do not have permission to do this action',
-        status: 500
+        status: 401
     },
 
     TOKEN_AUTHENTICATE_ERROR: {
@@ -53,13 +53,13 @@ export const Errors: { [key: string]: IMessage } = {
 
     NO_USER_FOUND: {
         success: false,
-        status: 401,
+        status: 404,
         message: 'No user found'
     },
 
     NO_DATA_FOUND: {
         success: false,
-        status: 409,
+        status: 404,
         message: "No data found to be changed"
     },
 

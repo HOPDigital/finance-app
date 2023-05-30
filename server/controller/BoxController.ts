@@ -3,6 +3,10 @@ import { Response, Request } from 'express'
 import { model as MoneyBoxModel } from '../model/MoneyBox'
 import { model as UserModel } from '../model/UserModel'
 
+import { ERRORS, SUCCESS } from '../services/Messages'
+
+import handle from '../services/Messages'
+
 /**
  * Get Boxes of User
  * 
@@ -14,15 +18,27 @@ export const getBoxesByUserId = async (req: Request, res: Response) => {
 
     const user_id = req?.params.id
 
-    if (!user_id) { res?.status(401).send('No user ID'); return }
+    if (!user_id) return handle(ERRORS.NO_ID_RECEIVED, res)
 
     const user = await UserModel.findById(user_id)
 
-    if (!user) { res?.status(409).send('No user found'); return }
+    if (!user) return handle(ERRORS.NO_USER_FOUND, res)
 
     const boxes = user.boxes
 
-    res?.status(200).json(boxes)
+    return handle(SUCCESS.USER_FOUND, res, boxes)
+}
+
+export const getBoxesById = async (req: Request, res: Response) => {
+    const box_id = req?.params.id
+
+    if (!box_id) return handle(ERRORS.NO_ID_RECEIVED, res)
+
+    const box = await MoneyBoxModel.findById(box_id)
+
+    if (!box) return handle(ERRORS.NO_DATA_FOUND, res)
+
+    return handle(SUCCESS.DATA_GATHERED, res, box)
 }
 
 /**

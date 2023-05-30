@@ -15,7 +15,6 @@ const logger = winston.createLogger({
     ]
 })
 
-
 export function logMiddleWare(req: Request, res: Response, next: NextFunction) {
     logger.info(`${req.method} ${req.url}`)
     next()
