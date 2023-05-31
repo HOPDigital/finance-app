@@ -9,6 +9,7 @@
   "dependencies": {
     "@types/jsonwebtoken": "^9.0.2",
     "@types/mongoose": "^5.11.97",
+    "@types/swagger-jsdoc": "^6.0.1",
     "bcryptjs": "^2.4.3",
     "body-parser": "^1.20.2",
     "cors": "^2.8.5",
@@ -18,15 +19,18 @@
     "mongoose": "^7.0.5",
     "morgan": "^1.10.0",
     "nodemon": "^2.0.22",
+    "swagger-autogen": "^2.23.1",
     "swagger-jsdoc": "^6.2.8",
     "swagger-ui-express": "^4.6.3",
+    "ts-json-schema-generator": "^1.2.0",
     "typescript": "^5.0.4",
     "winston": "^3.8.2"
   },
   "scripts": {
     "start": "node dist/server.js",
     "dev": "tsc && nodemon dist/server.js",
-    "test": "jest"
+    "test": "jest",
+    "swagger-autogen": "node ./swagger/SwaggerGenerator.js"
   },
   "devDependencies": {
     "@faker-js/faker": "^8.0.1",

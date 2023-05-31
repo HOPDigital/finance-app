@@ -22,7 +22,7 @@ const getUserById = async (req: Request, res: Response) => {
 
     if (!user) return handle(ERRORS.NO_USER_FOUND, res)
 
-    handle(SUCCESS.USER_FOUND, res)
+    handle(SUCCESS.USER_FOUND, res, user)
 
 }
 

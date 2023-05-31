@@ -9,7 +9,7 @@ router.post('/login', authenticateUser)
 // - Create user
 router.post('/register', createUser)
 
-//Middleware
+// - Middleware
 router.use(requireAuth)
 
 // - Get User by ID
