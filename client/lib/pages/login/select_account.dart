@@ -5,6 +5,7 @@ import 'package:flutter_application/utils/helpers/app_layout.dart';
 import 'package:flutter_application/utils/styles/colors.dart';
 import 'package:flutter_application/utils/styles/typography.dart';
 import 'package:flutter_application/widgets/app_screen_title.dart';
+import 'package:flutter_application/widgets/bottom_bar/bottom_bar.dart';
 import 'package:flutter_application/widgets/buttons/icon_button.dart';
 import 'package:gap/gap.dart';
 
@@ -68,7 +69,7 @@ class SelectAccount extends StatelessWidget {
                         placeholder: "My current account",
                         icon: const Icon(Icons.person_sharp),
                         bgColor: AppColors.blueColor,
-                        function: () => {},
+                        function: () => Navigator.push(context, MaterialPageRoute(builder: (_) => const BottomBar())),
                         buttonWidth: size.width,
                       ),
                       const Gap(20),
@@ -76,7 +77,7 @@ class SelectAccount extends StatelessWidget {
                         placeholder: "My company account",
                         icon: const Icon(Icons.business_outlined),
                         bgColor: AppColors.blueColor,
-                        function: () => {},
+                        function: () => Navigator.push(context, MaterialPageRoute(builder: (_) => const BottomBar())),
                         buttonWidth: size.width,
                       ),
                     ],

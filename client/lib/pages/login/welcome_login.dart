@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 // Widgets & Layouts
 import 'package:flutter_application/layouts/boarding_layout.dart';
 import 'package:flutter_application/pages/login/help_page.dart';
+import 'package:flutter_application/pages/login/select_account.dart';
 import 'package:flutter_application/widgets/app_screen_title.dart';
 
 // Utils
@@ -94,9 +95,9 @@ class WelcomeLogin extends StatelessWidget {
                               fontWeight: FontWeight.bold),
                         ),
                         TextButton(
-                          onPressed: () => {},
+                          onPressed: () => Navigator.push(context, MaterialPageRoute(builder: (_) => const SelectAccount())),
                           child: Text(
-                            "I don't have an account yet",
+                            "I forgot my PIN",
                             style: AppTypography.footnote.copyWith(
                               color: AppColors.smokyBlackColor,
                               decoration: TextDecoration.underline,
