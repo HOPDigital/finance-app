@@ -11,7 +11,7 @@ import 'package:gap/gap.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
 // Widgets
-import '../../widgets/app_large_text.dart';
+import '../../widgets/app_layout/app_large_text.dart';
 import 'package:flutter_application/widgets/buttons/icon_button.dart';
 
 class ThirdBoardingScreen extends StatelessWidget {

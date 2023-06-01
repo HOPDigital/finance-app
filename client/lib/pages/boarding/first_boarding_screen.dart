@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_application/layouts/boarding_layout.dart';
 
 // Widgets
-import '../../widgets/app_large_text.dart';
+import '../../widgets/app_layout/app_large_text.dart';
 
 class FirstBoardingScreen extends StatelessWidget {
   const FirstBoardingScreen({super.key});

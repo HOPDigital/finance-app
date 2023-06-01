@@ -4,7 +4,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_application/layouts/boarding_layout.dart';
 import 'package:flutter_application/utils/helpers/app_layout.dart';
 import 'package:flutter_application/utils/styles/typography.dart';
-import 'package:flutter_application/widgets/app_screen_title.dart';
+import 'package:flutter_application/widgets/app_layout/app_screen_title.dart';
 
 // Utils
 import 'package:flutter_application/utils/styles/colors.dart';

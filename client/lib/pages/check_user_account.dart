@@ -8,7 +8,7 @@ import 'package:flutter_application/utils/helpers/app_layout.dart';
 import 'package:flutter_application/utils/styles/typography.dart';
 
 // Widgets
-import 'package:flutter_application/widgets/check_user_option.dart';
+import 'package:flutter_application/widgets/app_layout/check_user_option.dart';
 
 // Pages & Layout
 import 'package:flutter_application/layouts/boarding_layout.dart';

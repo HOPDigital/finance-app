@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_application/utils/styles/colors.dart';
-import 'package:flutter_application/widgets/app_screen_title.dart';
+import 'package:flutter_application/widgets/app_layout/app_screen_title.dart';
 
 // Dependecies
 import 'package:smooth_page_indicator/smooth_page_indicator.dart';

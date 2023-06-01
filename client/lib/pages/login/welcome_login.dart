@@ -4,7 +4,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_application/layouts/boarding_layout.dart';
 import 'package:flutter_application/pages/login/help_page.dart';
 import 'package:flutter_application/pages/login/select_account.dart';
-import 'package:flutter_application/widgets/app_screen_title.dart';
+import 'package:flutter_application/widgets/app_layout/app_screen_title.dart';
 
 // Utils
 import 'package:flutter_application/utils/helpers/app_layout.dart';
@@ -94,6 +94,7 @@ class WelcomeLogin extends StatelessWidget {
                               color: AppColors.smokyBlackColor,
                               fontWeight: FontWeight.bold),
                         ),
+
                         TextButton(
                           onPressed: () => Navigator.push(context, MaterialPageRoute(builder: (_) => const SelectAccount())),
                           child: Text(

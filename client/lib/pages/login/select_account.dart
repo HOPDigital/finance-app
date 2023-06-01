@@ -4,7 +4,7 @@ import 'package:flutter_application/pages/login/help_page.dart';
 import 'package:flutter_application/utils/helpers/app_layout.dart';
 import 'package:flutter_application/utils/styles/colors.dart';
 import 'package:flutter_application/utils/styles/typography.dart';
-import 'package:flutter_application/widgets/app_screen_title.dart';
+import 'package:flutter_application/widgets/app_layout/app_screen_title.dart';
 import 'package:flutter_application/widgets/bottom_bar/bottom_bar.dart';
 import 'package:flutter_application/widgets/buttons/icon_button.dart';
 import 'package:gap/gap.dart';
