@@ -1,6 +1,6 @@
 const swaggerJsdoc = require("swagger-jsdoc")
 import * as swaggerJsDoc from 'swagger-jsdoc'
-import { create_box, get_box_by_id, get_boxes_by_user_id } from '../routes/docs/BoxDocs';
+import { create_box, delete_box, get_box_by_id, get_boxes_by_user_id, update_box } from '../routes/docs/BoxDocs';
 import { register_user, user_login, users_with_id } from '../routes/docs/UserDocs';
 
 interface IResponse {
@@ -49,7 +49,9 @@ const options: swaggerJsDoc.Options = {
 
             '/boxes/{id}': get_box_by_id,
             '/boxes/byUserId/{id}': get_boxes_by_user_id,
-            '/boxes/create': create_box
+            '/boxes/create': create_box,
+            '/boxes/update': update_box,
+            '/boxes/delete': delete_box
         },
     },
     apis: ["./routes/*.js"],
