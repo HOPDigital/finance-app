@@ -38,7 +38,7 @@ app.use('/transactions', TransactionRoute)
 app.use('/companies', CompanyRoute)
 app.use('/cards', CardRoute)
 
-app.use("/api-docs", swaggerUi.serve, swaggerUi.setup(specs, { explorer: true }));
+app.use("/api-docs", swaggerUi.serve, swaggerUi.setup(specs, { explorer: true }))
 
 app.listen(SERVER_PORT).on('listening', () => logger.info('server is up on port: ' + SERVER_PORT))
 
