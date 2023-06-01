@@ -7,7 +7,7 @@ const router = require("express").Router()
 
 router.use(requireAuth)
 
-router.post('/getByBoxId', getAllCardsByBox)
+router.get('/getByBoxId/:id', getAllCardsByBox)
 
 router.use('/getCardById/:id', getCardById)
 

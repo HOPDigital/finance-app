@@ -10,7 +10,7 @@ const DefaultController = new Controller(CardModel)
 
 export async function getAllCardsByBox(req: Request, res: Response) {
 
-    const { box_id } = req?.body
+    const { box_id } = req?.params
 
     if (!box_id) return handle(ERRORS.NO_ID_RECEIVED, res)
 
