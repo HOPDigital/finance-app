@@ -1,5 +1,11 @@
+interface IType {
+    type: string,
+    default?: any
+}
+
+
 export default interface IResponse {
-    success: boolean | string,
-    status: number | string,
-    message: string
+    success: IType,
+    status: IType,
+    message: IType
 }

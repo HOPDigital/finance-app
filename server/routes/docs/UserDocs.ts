@@ -2,9 +2,9 @@ import swaggerJSDoc, { PathItem } from "swagger-jsdoc";
 import IResponse from "../../interfaces/ResponseInterface";
 
 const default_response: IResponse = {
-    success: 'boolean',
-    status: 'number',
-    message: 'string'
+    success: { type: 'boolean', default: false },
+    status: { type: 'number' },
+    message: { type: 'string' }
 }
 
 export const user_login: PathItem = {
@@ -19,7 +19,7 @@ export const user_login: PathItem = {
                 name: "email",
                 in: "body",
                 required: true,
-                schema: { "type": "string" },
+                schema: { type: "string" },
                 description: 'E-mail used to create the user'
             },
 
@@ -27,42 +27,43 @@ export const user_login: PathItem = {
                 name: 'password',
                 in: 'body',
                 required: true,
-                schema: { 'type': 'string' },
+                schema: { type: 'string' },
                 description: 'Password created by that user'
             }
         ],
         responses: {
-            "200": {
+            400: {
+                description: "Missing fields",
+                schema: {
+                    type: 'object',
+                    properties: default_response
+                }
+            },
+            409: {
+                description: 'No user found',
+                schema: {
+                    type: 'object',
+                    properties: default_response
+                }
+            },
+            500: {
+                description: 'Server internal error',
+                schema: {
+                    type: 'object',
+                    properties: default_response
+                }
+            },
+            200: {
                 description: "Token created",
                 schema: {
-                    "type": "object",
-                    'properties': {
+                    type: "object",
+                    properties: {
                         ...default_response,
-                        'token': 'string'
+                        success: { type: 'boolean', default: true },
+                        token: { type: 'string' }
                     }
                 }
             },
-            "400": {
-                description: "Missing fields",
-                schema: {
-                    'type': 'object',
-                    'properties': default_response
-                }
-            },
-            '409': {
-                description: 'No user found',
-                schema: {
-                    'type': 'object',
-                    'properties': default_response
-                }
-            },
-            '500': {
-                description: 'Server internal error',
-                schema: {
-                    'type': 'object',
-                    'properties': default_response
-                }
-            }
         }
     }
 }
@@ -76,68 +77,59 @@ export const register_user: PathItem = {
         produces: ['application/json'],
         parameters: [
             {
-                name: 'email',
+                name: 'body',
                 in: 'body',
-                required: true,
-                schema: { type: 'string' },
-                description: 'E-mail of the user',
-            },
-            {
-                name: 'password',
-                in: 'body',
-                required: true,
-                schema: { type: 'string' },
-                description: 'Password of the user',
-            },
-            {
-                name: 'first_name',
-                in: 'body',
-                required: true,
-                schema: { type: 'string' },
-                description: 'First name of the user',
-            },
-            {
-                name: 'last_name',
-                in: 'body',
-                required: true,
-                schema: { type: 'string' },
-                description: 'Last name of the user',
-            },
-            {
-                name: 'birth_date',
-                in: 'body',
-                required: true,
-                schema: { type: 'string' },
-                description: 'Birth date of the user, in format: yyyy-mm-dd',
-            },
-            {
-                name: 'city',
-                in: 'body',
-                required: false,
-                schema: { type: 'string' },
-                description: 'City of the user',
-            },
-            {
-                name: 'country',
-                in: 'body',
-                required: true,
-                schema: { type: 'string' },
-                description: 'Country of the user, to calculate currencies',
-            },
-            {
-                name: 'phone',
-                in: 'body',
-                required: false,
-                schema: { type: 'number' },
-                description: 'Phone number of the user',
-            },
-            {
-                name: 'profile_picture',
-                in: 'body',
-                required: false,
-                schema: { type: 'string' },
-                description: 'URI of the profile picture of the user',
-            },
+                schema: {
+                    type: 'object',
+                    properties: {
+                        name: {
+                            required: true,
+                            schema: { type: 'string' },
+                            description: 'E-mail of the user',
+                        },
+                        password: {
+                            required: true,
+                            schema: { type: 'string' },
+                            description: 'Password of the user',
+                        },
+                        first_name: {
+                            required: true,
+                            schema: { type: 'string' },
+                            description: 'First name of the user',
+                        },
+                        last_name: {
+                            required: true,
+                            schema: { type: 'string' },
+                            description: 'Last name of the user',
+                        },
+                        birth_date: {
+                            required: true,
+                            schema: { type: 'string' },
+                            description: 'Birth date of the user, in format: yyyy-mm-dd',
+                        },
+                        city: {
+                            required: false,
+                            schema: { type: 'string' },
+                            description: 'City of the user',
+                        },
+                        country: {
+                            required: true,
+                            schema: { type: 'string' },
+                            description: 'Country of the user, to calculate currencies',
+                        },
+                        phone: {
+                            required: false,
+                            schema: { type: 'number' },
+                            description: 'Phone number of the user',
+                        },
+                        profile_picture: {
+                            required: false,
+                            schema: { type: 'string' },
+                            description: 'URI of the profile picture of the user',
+                        }
+                    }
+                }
+            }
         ],
         responses: {
             400: {
@@ -150,7 +142,7 @@ export const register_user: PathItem = {
             },
             200: {
                 description: 'User created successfuly',
-                schema: { ...default_response, user: 'object' }
+                schema: { ...default_response, user: { type: 'object' }, success: true }
             }
         }
     }
@@ -176,11 +168,11 @@ export const users_with_id: PathItem = {
         responses: {
             404: {
                 description: 'No user found',
-                schema: default_response
+                schema: { type: 'object', properties: default_response }
             },
             200: {
                 description: 'User found with success',
-                schema: { ...default_response, data: 'object' }
+                schema: { type: 'object', properties: { ...default_response, data: { type: 'array' } } }
             }
         }
     },
@@ -218,7 +210,28 @@ export const users_with_id: PathItem = {
                 }
             }
         ],
-        responses: []
+        responses: {
+            409: {
+                description: "No ID given to the api",
+                schema: { type: 'object', properties: default_response }
+            },
+            400: {
+                description: "Missing fields to be updated",
+                schema: { type: 'object', properties: default_response },
+            },
+            404: {
+                description: "No user found to be updated",
+                schema: { type: 'object', properties: default_response }
+            },
+            500: {
+                description: 'Internal error to update data',
+                schema: { type: 'object', properties: default_response }
+            },
+            200: {
+                description: 'User updated with sucess',
+                schema: { type: 'object', properties: { ...default_response, success: { type: 'boolean', default: true } } }
+            }
+        }
     },
 
     delete: {
@@ -233,6 +246,20 @@ export const users_with_id: PathItem = {
                 required: true
             }
         ],
-        responses: []
+        responses: {
+            409: {
+                description: "No ID given to the api",
+                schema: { type: 'object', properties: default_response }
+            },
+            500: {
+                description: 'Internal error, could not delete data',
+                schema: { type: 'object', properties: default_response }
+            },
+            200: {
+                description: 'User deleted with success',
+                schema: { type: 'object', properties: { ...default_response, success: { type: 'boolean', default: true } } }
+            }
+        },
     }
 }
+

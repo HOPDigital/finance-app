@@ -34,9 +34,7 @@ const options: swaggerJsDoc.Options = {
             },
         },
         servers: [
-            {
-                url: "http://localhost:9000",
-            },
+            { url: "http://localhost:9000", },
         ],
 
         paths: {

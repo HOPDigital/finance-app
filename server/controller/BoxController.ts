@@ -7,6 +7,8 @@ import { ERRORS, SUCCESS } from '../services/Messages'
 
 import handle from '../services/Messages'
 
+import { logger } from '../services/Logger'
+
 /**
  * Get Boxes of User
  * 
@@ -26,7 +28,7 @@ export const getBoxesByUserId = async (req: Request, res: Response) => {
 
     const boxes = user.boxes
 
-    return handle(SUCCESS.USER_FOUND, res, boxes)
+    return handle(SUCCESS.DATA_GATHERED, res, boxes)
 }
 
 export const getBoxesById = async (req: Request, res: Response) => {
@@ -54,13 +56,13 @@ export const createBox = async (req: Request, res: Response) => {
     const { user_id, fields } = req?.body
     const { name } = fields
 
-    if (!user_id) { res?.status(401).send('No user ID'); return }
+    if (!user_id) { return handle(ERRORS.NO_ID_RECEIVED, res) }
 
-    if (!name) { res?.status(401).send('Missing required fields'); return }
+    if (!name) { return handle(ERRORS.MISSING_FIELDS, res) }
 
     const user = await UserModel.findById(user_id)
 
-    if (!user) { res?.status(409).send('No user found'); return }
+    if (!user) { return handle(ERRORS.NO_USER_FOUND, res) }
 
     try {
         const box = new MoneyBoxModel({ name, ...fields })
@@ -68,11 +70,11 @@ export const createBox = async (req: Request, res: Response) => {
         user?.boxes?.push(box)
 
         await user.save()
-            .then(() => res?.status(200).json(box))
+            .then(() => handle(SUCCESS.DATA_CREATED, res, box))
 
     } catch (error) {
-        console.log(error)
-        res?.status(500).send('Error creating box')
+        logger.error(error)
+        handle(ERRORS.ERROR_CREATING_DATA, res)
     }
 
 }
