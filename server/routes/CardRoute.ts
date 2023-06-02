@@ -7,11 +7,11 @@ const router = require("express").Router()
 
 router.use(requireAuth)
 
-router.get('/getByBoxId/:id', getAllCardsByBox)
+router.get('/getByBoxId/:box_id', getAllCardsByBox)
 
-router.use('/getCardById/:id', getCardById)
+router.get('/getCardById/:card_id', getCardById)
 
-router.delete('/delete', deleteCard)
+router.delete('/delete/:card_id', deleteCard)
 
 router.post('/create', createCard)
 
