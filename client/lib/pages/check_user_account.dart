@@ -34,10 +34,10 @@ class CheckUserAccount extends StatelessWidget {
             const Gap(30),
             SizedBox(
               width: size.width,
-              child: Row(
+              child: const Row(
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 crossAxisAlignment: CrossAxisAlignment.center,
-                children: const [
+                children: [
                   CheckUserOption(
                     redirectToRoute: WelcomeLogin(),
                     placeholder: "Create account",
