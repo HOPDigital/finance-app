@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_application/layouts/boarding_layout.dart';
+import 'package:flutter_application/layouts/screens_layout.dart';
 
 // Widgets
 import '../../widgets/app_layout/app_large_text.dart';
@@ -9,7 +9,7 @@ class SecondBoardingScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return BoardingLayout(
+    return ScreensLayout(
       column: Column(
         mainAxisAlignment: MainAxisAlignment.spaceBetween,
         children: [

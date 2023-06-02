@@ -6,7 +6,7 @@ import 'package:flutter_application/utils/helpers/app_layout.dart';
 import 'package:flutter_application/utils/styles/colors.dart';
 
 // Layouts
-import 'package:flutter_application/layouts/boarding_layout.dart';
+import 'package:flutter_application/layouts/screens_layout.dart';
 import 'package:gap/gap.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
@@ -21,7 +21,7 @@ class ThirdBoardingScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     final dynamic size = AppLayout.getSize(context);
 
-    return BoardingLayout(
+    return ScreensLayout(
       column: Column(
         mainAxisAlignment: MainAxisAlignment.spaceBetween,
         children: [
