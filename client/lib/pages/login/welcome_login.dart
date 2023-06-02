@@ -10,6 +10,7 @@ import 'package:flutter_application/widgets/app_layout/app_screen_title.dart';
 import 'package:flutter_application/utils/helpers/app_layout.dart';
 import 'package:flutter_application/utils/styles/typography.dart';
 import 'package:flutter_application/utils/styles/colors.dart';
+import 'package:flutter_application/widgets/pin_field/pin_field.dart';
 import 'package:gap/gap.dart';
 
 class WelcomeLogin extends StatelessWidget {
@@ -53,12 +54,12 @@ class WelcomeLogin extends StatelessWidget {
             ),
             /* Pin Section */
             Container(
-              padding: const EdgeInsets.symmetric(horizontal: 10, vertical: 30),
+              padding: const EdgeInsets.symmetric(horizontal: 10, vertical: 25),
               decoration: BoxDecoration(
                 borderRadius: const BorderRadius.all(Radius.circular(20)),
                 color: AppColors.whiteColor,
               ),
-              height: 300,
+              height: AppLayout.getHeight(340),
               width: size.width * 0.9,
               child: Column(
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
@@ -85,27 +86,26 @@ class WelcomeLogin extends StatelessWidget {
                       ],
                     ),
                   ),
-                  SizedBox(
-                    child: Column(
-                      children: [
-                        Text(
-                          "Enter your PIN:",
-                          style: AppTypography.subhead.copyWith(
-                              color: AppColors.smokyBlackColor,
-                              fontWeight: FontWeight.bold),
-                        ),
-
-                        TextButton(
-                          onPressed: () => Navigator.push(context, MaterialPageRoute(builder: (_) => const SelectAccount())),
-                          child: Text(
-                            "I forgot my PIN",
-                            style: AppTypography.footnote.copyWith(
-                              color: AppColors.smokyBlackColor,
-                              decoration: TextDecoration.underline,
-                            ),
-                          ),
-                        ),
-                      ],
+                  const Gap(50),
+                  Text(
+                    "Enter your PIN:",
+                    style: AppTypography.subhead.copyWith(
+                        color: AppColors.smokyBlackColor,
+                        fontWeight: FontWeight.bold),
+                  ),
+                  const Gap(15),
+                  const PinCodeVerification(),
+                  TextButton(
+                    onPressed: () => Navigator.push(
+                        context,
+                        MaterialPageRoute(
+                            builder: (_) => const SelectAccount())),
+                    child: Text(
+                      "I forgot my PIN",
+                      style: AppTypography.footnote.copyWith(
+                        color: AppColors.smokyBlackColor,
+                        decoration: TextDecoration.underline,
+                      ),
                     ),
                   ),
                 ],
