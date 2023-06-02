@@ -37,13 +37,28 @@ class _DashboardState extends State<Dashboard> {
           mainAxisSize: MainAxisSize.max,
           crossAxisAlignment: CrossAxisAlignment.center,
           children: <Widget>[
-            Text(
-              "Welcome, Matt",
-              style: AppTypography.textBody.copyWith(
-                color: AppColors.whiteColor,
-                fontWeight: FontWeight.w600,
-              ),
-              textAlign: TextAlign.center,
+            Row(
+              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+              children: [
+                const SizedBox(
+                  width: 45,
+                ),
+                Text(
+                  "Welcome, Matt",
+                  style: AppTypography.textBody.copyWith(
+                    color: AppColors.whiteColor,
+                    fontWeight: FontWeight.w600,
+                  ),
+                  textAlign: TextAlign.center,
+                ),
+                IconButton(
+                  onPressed: () => {},
+                  icon: Icon(
+                    Icons.settings_outlined,
+                    color: AppColors.whiteColor,
+                  ),
+                ),
+              ],
             ),
             const Gap(20),
             AnimatedSmoothIndicator(
@@ -78,11 +93,17 @@ class _DashboardState extends State<Dashboard> {
               controller: _controller,
               scrollDirection: Axis.horizontal,
               padding: EdgeInsets.symmetric(horizontal: AppLayout.getWidth(10)),
-              child: Row(
-                children: const [
-                  DashboardCard(),
-                  DashboardCard(),
-                  DashboardCard(),
+              child: const Row(
+                children: [
+                  DashboardCard(
+                    accountType: "Current Account",
+                  ),
+                  DashboardCard(
+                    accountType: "Home Account",
+                  ),
+                  DashboardCard(
+                    accountType: "Business Account",
+                  ),
                 ],
               ),
             ),
