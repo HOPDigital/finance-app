@@ -214,3 +214,47 @@ export const update_company: PathItem = {
         }
     }
 }
+
+
+export const delete_company_by_id: PathItem = {
+    delete: {
+        tags: ['Companies'],
+        summary: "Delete company",
+        consumes: ['application/json'],
+        description: "Delete company by company id",
+        produces: ["application/json"],
+        parameters: [
+            {
+                name: "user_id",
+                in: "path",
+                required: true,
+                schema: { "type": "string" },
+                description: 'ID of the user'
+            },
+        ],
+        responses: {
+            200: {
+                description: 'Company deleted with success',
+                schema: {
+                    type: 'object',
+                    properties: { ...default_response, success: { type: 'boolean', default: true } }
+                }
+            },
+            409: {
+                description: "No ID received",
+                schema: {
+                    type: "object",
+                    properties: default_response,
+
+                }
+            },
+            404: {
+                description: 'No data found',
+                schema: {
+                    type: 'object',
+                    properties: default_response
+                }
+            }
+        }
+    }
+} 
