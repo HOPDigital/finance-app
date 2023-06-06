@@ -15,7 +15,7 @@ export const getAllCompanies = async (req: Request, res: Response) => Controller
 
 export const getCompanyByUserId = async (req: Request, res: Response) => {
 
-    const user_id = req?.params.id
+    const user_id = req?.params.user_id
 
     if (!user_id) { res?.status(Errors.MISSING_FIELDS.status).json(Errors.MISSING_FIELDS); return }
 
