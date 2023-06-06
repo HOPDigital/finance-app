@@ -5,7 +5,7 @@ const UserModel = require('../model/UserModel').model;
 
 describe.skip('User controller', () => {
 
-    describe('POST /register', () => {
+    describe.skip('POST /register', () => {
         it('should create a new user', async () => {
             const userData = {
                 email: 'test@example.com',

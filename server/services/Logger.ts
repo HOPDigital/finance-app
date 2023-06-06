@@ -11,10 +11,9 @@ const logger = winston.createLogger({
     ),
     transports: [
         new winston.transports.Console(),
-        new winston.transports.File({ filename: '../logs/logs.log' })
+        new winston.transports.File({ filename: './logs/logs.log' })
     ]
 })
-
 
 export function logMiddleWare(req: Request, res: Response, next: NextFunction) {
     logger.info(`${req.method} ${req.url}`)

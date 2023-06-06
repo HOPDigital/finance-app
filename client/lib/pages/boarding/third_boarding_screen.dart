@@ -1,16 +1,17 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_application/pages/check_user_account.dart';
 
 // Utils
 import 'package:flutter_application/utils/helpers/app_layout.dart';
 import 'package:flutter_application/utils/styles/colors.dart';
 
 // Layouts
-import 'package:flutter_application/layouts/boarding_layout.dart';
+import 'package:flutter_application/layouts/screens_layout.dart';
 import 'package:gap/gap.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 
 // Widgets
-import '../../widgets/app_large_text.dart';
-import '../../widgets/app_screen_title.dart';
+import '../../widgets/app_layout/app_large_text.dart';
 import 'package:flutter_application/widgets/buttons/icon_button.dart';
 
 class ThirdBoardingScreen extends StatelessWidget {
@@ -20,21 +21,11 @@ class ThirdBoardingScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     final dynamic size = AppLayout.getSize(context);
 
-    return BoardingLayout(
+    return ScreensLayout(
       column: Column(
         mainAxisAlignment: MainAxisAlignment.spaceBetween,
         children: [
-          AppScreenTitle(
-            text: 'What\'s new',
-            leftButton: IconButton(
-              onPressed: () => {},
-              icon: const Icon(
-                Icons.arrow_back_ios,
-                size: 20,
-                color: Colors.white,
-              ),
-            ),
-          ),
+          const SizedBox(),
           Container(
             height: 240,
             padding: const EdgeInsets.symmetric(horizontal: 20),
@@ -43,14 +34,22 @@ class ThirdBoardingScreen extends StatelessWidget {
                 const AppLargeText(text: 'Personalize your cards'),
                 const Gap(20),
                 IconButtonWidget(
-                    placeholder: "Start",
-                    icon: const Icon(
-                      Icons.arrow_circle_right_rounded,
-                      color: Colors.white,
-                    ),
-                    bgColor: AppColors.bitterSweetColor,
-                    function: () => {},
-                    buttonWidth: size.width * 0.9)
+                  placeholder: "Start",
+                  icon: const Icon(
+                    Icons.arrow_circle_right_rounded,
+                    color: Colors.white,
+                  ),
+                  bgColor: AppColors.bitterSweetColor,
+                  function: () async {
+                    final prefs = await SharedPreferences.getInstance();
+                    prefs.setBool('showCheckUserAccount', true);
+
+                    Navigator.of(context).pushReplacement(
+                      MaterialPageRoute(builder: (_) => const CheckUserAccount())
+                    );
+                  },
+                  buttonWidth: size.width * 0.9,
+                ),
               ],
             ),
           ),

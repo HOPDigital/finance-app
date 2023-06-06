@@ -7,11 +7,10 @@ import 'package:page_transition/page_transition.dart';
 // Utils
 import 'package:flutter_application/utils/styles/colors.dart';
 
-// Pages
-import 'package:flutter_application/pages/check_user_account.dart';
-
 class SplashIntroScreen extends StatefulWidget {
-  const SplashIntroScreen({super.key});
+  const SplashIntroScreen({super.key, required this.screenToBeCalled});
+
+  final Widget screenToBeCalled;
 
   @override
   State<SplashIntroScreen> createState() => _SplashIntroScreenState();
@@ -31,7 +30,7 @@ class _SplashIntroScreenState extends State<SplashIntroScreen> {
         splashTransition: SplashTransition.fadeTransition,
         pageTransitionType: PageTransitionType.fade,
         backgroundColor: AppColors.blueColor,
-        nextScreen: const CheckUserAccount(),
+        nextScreen: widget.screenToBeCalled,
       ),
     );
   }

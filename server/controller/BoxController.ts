@@ -3,6 +3,12 @@ import { Response, Request } from 'express'
 import { model as MoneyBoxModel } from '../model/MoneyBox'
 import { model as UserModel } from '../model/UserModel'
 
+import { ERRORS, SUCCESS } from '../services/Messages'
+
+import handle from '../services/Messages'
+
+import { logger } from '../services/Logger'
+
 /**
  * Get Boxes of User
  * 
@@ -14,15 +20,27 @@ export const getBoxesByUserId = async (req: Request, res: Response) => {
 
     const user_id = req?.params.id
 
-    if (!user_id) { res?.status(401).send('No user ID'); return }
+    if (!user_id) return handle(ERRORS.NO_ID_RECEIVED, res)
 
     const user = await UserModel.findById(user_id)
 
-    if (!user) { res?.status(409).send('No user found'); return }
+    if (!user) return handle(ERRORS.NO_USER_FOUND, res)
 
     const boxes = user.boxes
 
-    res?.status(200).json(boxes)
+    return handle(SUCCESS.DATA_GATHERED, res, boxes)
+}
+
+export const getBoxesById = async (req: Request, res: Response) => {
+    const box_id = req?.params.id
+
+    if (!box_id) return handle(ERRORS.NO_ID_RECEIVED, res)
+
+    const box = await MoneyBoxModel.findById(box_id)
+
+    if (!box) return handle(ERRORS.NO_DATA_FOUND, res)
+
+    return handle(SUCCESS.DATA_GATHERED, res, box)
 }
 
 /**
@@ -38,13 +56,13 @@ export const createBox = async (req: Request, res: Response) => {
     const { user_id, fields } = req?.body
     const { name } = fields
 
-    if (!user_id) { res?.status(401).send('No user ID'); return }
+    if (!user_id) { return handle(ERRORS.NO_ID_RECEIVED, res) }
 
-    if (!name) { res?.status(401).send('Missing required fields'); return }
+    if (!name) { return handle(ERRORS.MISSING_FIELDS, res) }
 
     const user = await UserModel.findById(user_id)
 
-    if (!user) { res?.status(409).send('No user found'); return }
+    if (!user) { return handle(ERRORS.NO_USER_FOUND, res) }
 
     try {
         const box = new MoneyBoxModel({ name, ...fields })
@@ -52,11 +70,11 @@ export const createBox = async (req: Request, res: Response) => {
         user?.boxes?.push(box)
 
         await user.save()
-            .then(() => res?.status(200).json(box))
+            .then(() => handle(SUCCESS.DATA_CREATED, res, box))
 
     } catch (error) {
-        console.log(error)
-        res?.status(500).send('Error creating box')
+        logger.error(error)
+        handle(ERRORS.ERROR_CREATING_DATA, res)
     }
 
 }
@@ -75,15 +93,13 @@ export const updateBox = async (req: Request, res: Response) => {
 
     const { user_id, box_id, fields } = req?.body
 
-    if (!(user_id && box_id)) { res?.status(401).send('No user ID'); return }
+    if (!(user_id && box_id)) { return handle(ERRORS.NO_ID_RECEIVED, res) }
 
-    if (!fields) { res?.status(401).send('Missing required fields'); return }
-    if ((fields?.name && fields.name === '')) { res?.status(401).send('Missing required fields'); return }
+    if (!fields || fields?.name && fields.name === '') { return handle(ERRORS.MISSING_FIELDS, res) }
 
     const user = await UserModel.findById(user_id)
 
-    if (!user) { res?.status(409).send('No user found'); return }
-
+    if (!user) { return handle(ERRORS.NO_USER_FOUND, res) }
 
     const filter = { _id: user_id, "boxes._id": box_id };
     const update = { $set: fields };
@@ -92,16 +108,14 @@ export const updateBox = async (req: Request, res: Response) => {
         const result = await UserModel.updateOne(filter, update);
 
         if (result.modifiedCount === 0) {
-            res?.status(409).send('No user or money box found');
-            return;
+            return handle(ERRORS.NO_DATA_FOUND, res)
         }
 
-        res?.status(200).json({ message: 'Money box updated' });
+        handle(SUCCESS.DATA_UPDATED, res)
 
     } catch (error) {
-        console.log(error);
-        res?.status(500).send('Error updating money box');
-
+        logger.error(error)
+        handle(ERRORS.ERROR_UPDATING_DATA, res)
     }
 }
 
@@ -124,14 +138,12 @@ export const deleteBox = async (req: Request, res: Response) => {
     try {
         const result = await UserModel.updateOne(filter, update);
 
-        if (result.modifiedCount === 0) {
-            res?.status(409).send('No user or money box found');
-            return;
-        }
+        if (result.modifiedCount === 0) return handle(ERRORS.NO_DATA_FOUND, res)
 
-        res?.status(200).json({ message: 'Money box deleted' });
+        handle(SUCCESS.DATA_DELETED, res)
+
     } catch (error) {
-        console.log(error);
-        res?.status(500).send('Error deleting money box');
+        logger.error(error)
+        handle(ERRORS.ERROR_DELETING_DATA, res)
     }
 }

@@ -1,26 +1,19 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_application/layouts/boarding_layout.dart';
+import 'package:flutter_application/layouts/screens_layout.dart';
 
 // Widgets
-import '../../widgets/app_large_text.dart';
-import '../../widgets/app_screen_title.dart';
+import '../../widgets/app_layout/app_large_text.dart';
 
 class FirstBoardingScreen extends StatelessWidget {
   const FirstBoardingScreen({super.key});
 
   @override
   Widget build(BuildContext context) {
-    return BoardingLayout(
+    return ScreensLayout(
       column: Column(
         mainAxisAlignment: MainAxisAlignment.spaceBetween,
         children: [
-          const AppScreenTitle(
-            text: 'What\'s new',
-            rightButton: Text(
-              'Skip',
-              style: TextStyle(color: Colors.white),
-            ),
-          ),
+          const SizedBox(),
           Container(
             height: 240,
             padding: const EdgeInsets.symmetric(horizontal: 20),

@@ -79,7 +79,7 @@ export class Controller {
 
         if (!parent_id) return handle(ERRORS.NO_ID_RECEIVED, res)
 
-        if (validation) return handle(ERRORS.ERROR_CREATING_DATA, res)
+        if (validation) return handle(ERRORS.MISSING_FIELDS, res)
 
         try {
             const parent = await parent_model.findById(parent_id)
@@ -91,7 +91,7 @@ export class Controller {
             parent?.[parent_field]?.push(nest)
 
             await parent?.save()
-                .then(() => handle(SUCCESS.DATA_CREATED, res, nest.toObject))
+                .then(() => handle(SUCCESS.DATA_CREATED, res, nest.toObject()))
         }
         catch (error) {
             return handle(ERRORS.INCORRECT_FIELDS, res)
@@ -99,30 +99,27 @@ export class Controller {
     }
 
     // Update Methods
-    update = async (req: Request, res: Response, id: ObjectId, fields: Object, validation: boolean) => {
+    update = async (req: Request, res: Response, id: ObjectId | string, fields: Object, validation?: boolean) => {
 
-        if (!id) { res.status(Errors.NO_ID_RECEIVED.status).json(Errors.NO_ID_RECEIVED); return }
-        if (validation) { res?.status(Errors.MISSING_FIELDS.status).json(Errors.MISSING_FIELDS); return }
+        if (!id) { return handle(ERRORS.NO_ID_RECEIVED, res) }
+        if (validation) { return handle(ERRORS.MISSING_FIELDS, res) }
 
         const existing = await this.model.findById(id)
 
-        if (!existing) {
-            res.status(Errors.NO_DATA_FOUND.status).json(Errors.NO_DATA_FOUND)
-            return
-        }
+        if (!existing) { return handle(ERRORS.NO_DATA_FOUND, res) }
 
         await this.model.findByIdAndUpdate(id, fields)
-            .then(() => res.status(Success.DATA_UPDATED.status).json(Success.DATA_UPDATED))
-            .catch(() => res.status(Errors.ERROR_UPDATING_DATA.status).json(Errors.ERROR_UPDATING_DATA))
+            .then(() => handle(SUCCESS.DATA_UPDATED, res))
+            .catch(() => handle(ERRORS.ERROR_UPDATING_DATA, res))
     }
 
 
-    deleteById = async (req: Request, res: Response, id: ObjectId) => {
-        if (!id) { res.status(Errors.NO_ID_RECEIVED.status).json(Errors.NO_ID_RECEIVED); return }
+    deleteById = async (req: Request, res: Response, id: ObjectId | string) => {
+        if (!id) { return handle(ERRORS.NO_ID_RECEIVED, res) }
 
         await this.model.findByIdAndDelete(id)
-            .then(() => res.status(Success.DATA_DELETED.status).json(Success.DATA_DELETED))
-            .catch(() => res.status(Errors.ERROR_DELETING_DATA.status).json(Errors.ERROR_DELETING_DATA))
+            .then(() => handle(SUCCESS.DATA_DELETED, res))
+            .catch(() => handle(ERRORS.ERROR_DELETING_DATA, res))
 
     }
 }

@@ -12,7 +12,7 @@ export default function connectToDataBase(MONGO_URI: string | undefined): any {
 
         .then(() => {
             logger.info('connected to database')
-            logger.info(MONGO_URI)
+            logger.debug(MONGO_URI)
         })
 
         .catch((err: Error) => {

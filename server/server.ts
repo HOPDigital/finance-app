@@ -4,11 +4,16 @@ import connectToDataBase from "./config/database"
 const express = require('express')
 const cors = require('cors')
 
-const UserRoute = require('./routes/UserRoute')
-const MoneyBoxRoute = require('./routes/BoxRoute')
-const CategoryRoute = require('./routes/CategoriesRoute')
+import UserRoute from './routes/UserRoute'
+import MoneyBoxRoute from './routes/BoxRoute'
+import CompanyRoute from './routes/CompanyRoute'
+import CardRoute from './routes/CardRoute'
+import TransactionRoute from './routes/TransactionRoute'
 
 const morgan = require('morgan')
+const swaggerUi = require("swagger-ui-express");
+
+import { specs } from "./services/Swagger"
 
 const app = express()
 require('dotenv').config()
@@ -29,13 +34,14 @@ app.use(express.json())
 
 app.use('/user', UserRoute)
 app.use('/boxes', MoneyBoxRoute)
-app.use('/categories', CategoryRoute)
+app.use('/transactions', TransactionRoute)
+app.use('/companies', CompanyRoute)
+app.use('/cards', CardRoute)
 
-app.listen(SERVER_PORT)
-    .on('listening', () => logger.info('server is up on port: ' + SERVER_PORT))
+app.use("/api-docs", swaggerUi.serve, swaggerUi.setup(specs, { explorer: true }))
 
+app.listen(SERVER_PORT).on('listening', () => logger.info('server is up on port: ' + SERVER_PORT))
 
 connectToDataBase(MONGO_URI)
-
 
 module.exports = app
