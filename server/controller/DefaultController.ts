@@ -79,7 +79,7 @@ export class Controller {
 
         if (!parent_id) return handle(ERRORS.NO_ID_RECEIVED, res)
 
-        if (validation) return handle(ERRORS.ERROR_CREATING_DATA, res)
+        if (validation) return handle(ERRORS.MISSING_FIELDS, res)
 
         try {
             const parent = await parent_model.findById(parent_id)
@@ -91,7 +91,7 @@ export class Controller {
             parent?.[parent_field]?.push(nest)
 
             await parent?.save()
-                .then(() => handle(SUCCESS.DATA_CREATED, res, nest.toObject))
+                .then(() => handle(SUCCESS.DATA_CREATED, res, nest.toObject()))
         }
         catch (error) {
             return handle(ERRORS.INCORRECT_FIELDS, res)

@@ -1,4 +1,4 @@
-import { getAllCompanies, getCompanyByUserId, createCompany, updateCompany } from '../controller/CompanyController'
+import { getAllCompanies, getCompanyByUserId, createCompany, updateCompany, deleteCompany } from '../controller/CompanyController'
 
 import { requireAuth } from '../middleware/auth';
 
@@ -6,12 +6,12 @@ const router = require("express").Router()
 
 router.use(requireAuth)
 
-router.get('/getAllCompaniesByUserId', getAllCompanies)
+router.get('/getAllCompaniesByUserId', getCompanyByUserId)
 
 router.post('/createCompany', createCompany)
 
 router.patch('/updateCompany', updateCompany)
 
-router.post('/getCompanyByUserId', getCompanyByUserId)
+router.delete('/deleteCompany', deleteCompany)
 
 export default router

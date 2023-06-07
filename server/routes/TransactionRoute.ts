@@ -7,14 +7,14 @@ const router = require("express").Router()
 
 router.use(requireAuth)
 
-router.post('/transactionsByBoxId', getTransactionsByBoxId)
+router.get('/transactionsByBoxId/:id', getTransactionsByBoxId)
 
-router.post('/transactionsByUserId', getTransactionsByUserId)
+router.get('/transactionsByUserId/:id', getTransactionsByUserId)
 
 router.post('/createTransactions', createTransaction)
 
 router.patch('/updateTransaction', updateTransaction)
 
-router.delete('/deleteTransaction', deleteTransaction)
+router.delete('/deleteTransaction/:id', deleteTransaction)
 
 export default router

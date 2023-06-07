@@ -2,7 +2,8 @@ const swaggerJsdoc = require("swagger-jsdoc")
 import * as swaggerJsDoc from 'swagger-jsdoc'
 import { create_box, delete_box, get_box_by_id, get_boxes_by_user_id, update_box } from '../routes/docs/BoxDocs';
 import { register_user, user_login, users_with_id } from '../routes/docs/UserDocs';
-import { get_card_by_box_id } from '../routes/docs/CardDocs';
+import { create_card, delete_card, get_card_by_box_id, get_card_by_id, update_card } from '../routes/docs/CardDocs';
+import { create_company, delete_company_by_id, get_companies_by_user_id, update_company } from '../routes/docs/CompanyDocs';
 
 interface IResponse {
     success: boolean | string,
@@ -57,7 +58,18 @@ const options: swaggerJsDoc.Options = {
 
             /* Card Related Endpoints */
 
-            '/cards/getByBoxId': get_card_by_box_id
+            '/cards/getByBoxId/{box_id}': get_card_by_box_id,
+            '/cards/getCardByid/{card_id}': get_card_by_id,
+            '/cards/delete/{card_id}': delete_card,
+            '/cards/create': create_card,
+            '/cards/update': update_card,
+
+            /* Company Related Endpoint */
+
+            '/companies/getAllCompaniesByUserId': get_companies_by_user_id,
+            '/companies/createCompany': create_company,
+            '/companies/updateCompany': update_company,
+            '/companies/deleteCompany': delete_company_by_id,
         },
     },
     apis: ["./routes/*.js"],

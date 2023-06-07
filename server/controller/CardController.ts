@@ -54,7 +54,7 @@ export async function updateCard(req: Request, res: Response) {
 
 export async function deleteCard(req: Request, res: Response) {
 
-    const { id } = req?.body
+    const { id } = req?.params
 
     await DefaultController.deleteById(req, res, id)
 }
