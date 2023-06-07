@@ -64,8 +64,8 @@ class _BottomBarState extends State<BottomBar> {
               label: "Account History",
             ),
             BottomNavigationBarItem(
-              icon: Icon(Icons.account_balance_wallet_outlined),
-              activeIcon: Icon(Icons.account_balance_wallet_rounded),
+              icon: Icon(Icons.menu),
+              activeIcon: Icon(Icons.menu),
               label: "Payments",
             ),
           ],

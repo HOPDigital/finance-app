@@ -7,6 +7,8 @@ import { model as CompanyModel } from "../model/CompanyModel"
 import { Controller as DefaultController } from "./DefaultController"
 
 import { Request, Response } from "express"
+import handle, { ERRORS, SUCCESS } from "../services/Messages"
+import { logger } from "../services/Logger"
 
 
 const Controller = new DefaultController(CompanyModel)
@@ -15,7 +17,7 @@ export const getAllCompanies = async (req: Request, res: Response) => Controller
 
 export const getCompanyByUserId = async (req: Request, res: Response) => {
 
-    const user_id = req?.params.id
+    const user_id = req?.params.user_id
 
     if (!user_id) { res?.status(Errors.MISSING_FIELDS.status).json(Errors.MISSING_FIELDS); return }
 
@@ -84,4 +86,22 @@ export const updateCompany = async (req: Request, res: Response) => {
         res?.status(Errors.COMPANY_NOT_UPDATED.status).json(Errors.COMPANY_NOT_UPDATED);
 
     }
+}
+
+export const deleteCompany = async (req: Request, res: Response) => {
+    const { company_id } = req?.body
+
+
+    if (!company_id) return handle(ERRORS.NO_ID_RECEIVED, res)
+
+    try {
+        await Controller.deleteById(req, res, company_id)
+
+        return handle(SUCCESS.DATA_DELETED, res)
+    }
+    catch (error) {
+        logger.error(error)
+        return handle(ERRORS.ERROR_DELETING_DATA, res)
+    }
+
 }

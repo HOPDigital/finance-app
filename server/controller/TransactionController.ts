@@ -3,8 +3,7 @@ import { Request, Response, response } from 'express'
 import { model as TransactionModel } from '../model/TransactionsModel'
 import { model as UserModel } from '../model/UserModel'
 import { model as BoxModel } from '../model/MoneyBox'
-
-import ITransaction from '../interfaces/TransactionInterface'
+import { model as CategoryModel } from '../model/CategoryModel'
 
 import { Controller } from './DefaultController'
 
@@ -52,6 +51,13 @@ export const getTransactionsByBoxId = async (req: Request, res: Response) => {
 export const createTransaction = async (req: Request, res: Response) => {
     const { box_id, fields } = req?.body
 
+    const { category_id } = fields
+
+    if (category_id) {
+        const category = await CategoryModel.findById
+        fields.transaction = category
+    }
+
     await DefaultController
         .createNested(req, res,
             {
@@ -70,7 +76,7 @@ export const updateTransaction = async (req: Request, res: Response) => {
 
 
 export const deleteTransaction = async (req: Request, res: Response) => {
-    const { transaction_id } = req?.body
+    const { transaction_id } = req?.params
 
     await DefaultController.deleteById(req, res, transaction_id)
 }
