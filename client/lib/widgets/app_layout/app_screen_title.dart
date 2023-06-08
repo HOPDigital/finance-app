@@ -5,10 +5,12 @@ class AppScreenTitle extends StatelessWidget {
   final Widget? leftButton;
   final Widget? rightButton;
   final String text;
+  final Color textColor;
 
   const AppScreenTitle({
     super.key,
     required this.text,
+    this.textColor = Colors.white,
     this.leftButton,
     this.rightButton,
   });
@@ -27,7 +29,7 @@ class AppScreenTitle extends StatelessWidget {
         Center(
           child: Text(
             text,
-            style: AppTypography.headline,
+            style: AppTypography.headline.copyWith(color: textColor),
           ),
         ),
         SizedBox(
