@@ -41,10 +41,11 @@ class _DashboardState extends State<Dashboard> {
           padding: const EdgeInsets.only(left: 10.0),
           width: size.width,
           child: Column(
-            mainAxisAlignment: MainAxisAlignment.center,
+            mainAxisAlignment: MainAxisAlignment.start,
             mainAxisSize: MainAxisSize.max,
             crossAxisAlignment: CrossAxisAlignment.center,
             children: <Widget>[
+              const Gap(15),
               Padding(
                 padding: EdgeInsets.symmetric(
                   horizontal: AppLayout.getWidth(15),
@@ -52,29 +53,14 @@ class _DashboardState extends State<Dashboard> {
                 child: Row(
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children: [
-                    Row(
-                      mainAxisAlignment: MainAxisAlignment.center,
-                      crossAxisAlignment: CrossAxisAlignment.center,
-                      children: [
-                        IconButton(
-                          onPressed: () =>
-                              {scaffoldKey.currentState?.openDrawer()},
-                          icon: Icon(
-                            Icons.person_4_outlined,
-                            color: AppColors.whiteColor,
-                          ),
-                        ),
-                        const Gap(5),
-                        Text(
-                          "Welcome, Matheus",
-                          style: AppTypography.textBody.copyWith(
-                            color: AppColors.whiteColor,
-                            fontWeight: FontWeight.w600,
-                          ),
-                          textAlign: TextAlign.center,
-                        ),
-                      ],
+                    IconButton(
+                      onPressed: () => {scaffoldKey.currentState?.openDrawer()},
+                      icon: Icon(
+                        Icons.menu_open,
+                        color: AppColors.whiteColor,
+                      ),
                     ),
+                    const Gap(5),
                     IconButton(
                       onPressed: () => Navigator.push(
                         context,
