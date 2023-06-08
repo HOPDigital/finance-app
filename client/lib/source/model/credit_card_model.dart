@@ -1,12 +1,11 @@
 import 'dart:ui';
-
 import 'package:flutter/material.dart';
-import 'package:flutter_application/utils/styles/colors.dart';
 
 class CreditCard {
   final String name;
   final String currency;
-  final Color color = AppColors.blueColor;
+  final Color color;
+  final Color textColor;
 
   final int number;
   final String date;
@@ -15,6 +14,8 @@ class CreditCard {
   CreditCard({
     required this.number,
     required this.balance,
+    required this.color,
+    required this.textColor,
     this.currency = 'USD',
     this.name = 'My Personal Card',
     this.date = '01/23',
