@@ -1,5 +1,8 @@
 import 'package:flutter/material.dart';
+
+// Pages
 import 'package:flutter_application/pages/dashboard/dashboard.dart';
+import 'package:flutter_application/pages/cards/cards.dart';
 
 // Utils
 import 'package:flutter_application/utils/styles/colors.dart';
@@ -16,7 +19,7 @@ class _BottomBarState extends State<BottomBar> {
 
   static final List<Widget> _widgetPages = <Widget>[
     const Dashboard(),
-    const Text("Cards"),
+    const CardsScreen(),
     const Text("Account History"),
     const Text("Payments"),
   ];
