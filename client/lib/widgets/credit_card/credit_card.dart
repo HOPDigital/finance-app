@@ -14,16 +14,17 @@ class CreditCardWidget extends StatelessWidget {
       height: 200,
       width: 350,
       padding: const EdgeInsets.all(20),
-      margin: const EdgeInsets.only(right: 10.0),
+      margin: const EdgeInsets.symmetric(horizontal: 10.0),
       decoration: BoxDecoration(
         borderRadius: BorderRadius.circular(20),
         color: card.color,
         boxShadow: [
           BoxShadow(
-              color: card.color.withOpacity(.2),
-              spreadRadius: 3,
-              blurRadius: 3,
-              offset: const Offset(0, 3))
+            color: card.color.withOpacity(.2),
+            spreadRadius: 3,
+            blurRadius: 3,
+            offset: const Offset(0, 3),
+          ),
         ],
       ),
       child: Stack(
