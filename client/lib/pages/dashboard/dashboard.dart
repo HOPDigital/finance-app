@@ -22,8 +22,9 @@ class Dashboard extends StatefulWidget {
 }
 
 class _DashboardState extends State<Dashboard> {
-  final ScrollController _controller = ScrollController();
   GlobalKey<ScaffoldState> scaffoldKey = GlobalKey<ScaffoldState>();
+
+  final PageController _controller = PageController();
   int _currentIndex = 0;
 
   @override
@@ -40,6 +41,7 @@ class _DashboardState extends State<Dashboard> {
           decoration: BoxDecoration(color: AppColors.blueColor),
           padding: const EdgeInsets.only(left: 10.0),
           width: size.width,
+          height: size.height,
           child: Column(
             mainAxisAlignment: MainAxisAlignment.start,
             mainAxisSize: MainAxisSize.max,
@@ -77,23 +79,23 @@ class _DashboardState extends State<Dashboard> {
                 ),
               ),
               const Gap(20),
-              AnimatedSmoothIndicator(
-                activeIndex: _currentIndex,
+              SmoothPageIndicator(
+                controller: _controller,
                 count: 3,
-                axisDirection: Axis.horizontal,
-                curve: Curves.easeInOut,
-                duration: const Duration(milliseconds: 300),
                 onDotClicked: (int index) {
                   setState(() {
                     _currentIndex = index;
                   });
                 },
-                effect: ExpandingDotsEffect(
-                  activeDotColor: AppColors.whiteColor,
+                effect: ScrollingDotsEffect(
+                  activeDotScale: 1.3,
+                  activeStrokeWidth: 1.0,
+                  dotHeight: 10.0,
+                  dotWidth: 10.0,
                   dotColor: AppColors.silverColor,
-                  dotHeight: 10,
-                  dotWidth: 10,
-                  spacing: 10,
+                  activeDotColor: AppColors.whiteColor,
+                  spacing: 10.0,
+                  fixedCenter: false,
                 ),
               ),
               const Gap(20),
@@ -105,23 +107,30 @@ class _DashboardState extends State<Dashboard> {
                 textAlign: TextAlign.center,
               ),
               const Gap(15),
-              SingleChildScrollView(
-                controller: _controller,
-                scrollDirection: Axis.horizontal,
-                padding:
-                    EdgeInsets.symmetric(horizontal: AppLayout.getWidth(10)),
-                child: const Row(
-                  children: [
-                    DashboardCard(
-                      accountType: "Current Account",
-                    ),
-                    DashboardCard(
-                      accountType: "Home Account",
-                    ),
-                    DashboardCard(
-                      accountType: "Business Account",
-                    ),
-                  ],
+              SizedBox(
+                width: size.width * 0.95,
+                height: AppLayout.getHeight(540),
+                child: Padding(
+                  padding: const EdgeInsets.only(left: 10.0),
+                  child: PageView(
+                    controller: _controller,
+                    onPageChanged: (int index) => {
+                      setState(() {
+                        _currentIndex = index;
+                      })
+                    },
+                    children: const <Widget>[
+                      DashboardCard(
+                        accountType: "Current Account",
+                      ),
+                      DashboardCard(
+                        accountType: "Home Account",
+                      ),
+                      DashboardCard(
+                        accountType: "Business Account",
+                      ),
+                    ],
+                  ),
                 ),
               ),
             ],
