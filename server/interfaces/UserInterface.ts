@@ -4,7 +4,7 @@ import Box from "./BoxInterface"
 import Company from "./Company"
 
 export default interface IUser {
-    _id: Types.ObjectId,
+    _id?: Types.ObjectId,
     first_name: string,
     last_name: string,
     password: string
@@ -14,7 +14,7 @@ export default interface IUser {
     city?: string,
     country: string,
     profile_picture?: string,
-    created_at: Date,
+    created_at?: Date,
     companies?: Array<Company>,
     boxes?: Array<Box>
 }
