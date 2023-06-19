@@ -16,7 +16,7 @@ import { IUserToken } from '../interfaces/UserInterface'
 const DefaultController = new Controller(UserModel)
 
 
-const getUserById = async (req: Request, res: Response) => {
+export const getUserById = async (req: Request, res: Response) => {
 
     const user = (await UserModel.find({}))[0]
 
@@ -26,7 +26,7 @@ const getUserById = async (req: Request, res: Response) => {
 
 }
 
-const authenticateUser = async (req: Request, res: Response) => {
+export const authenticateUser = async (req: Request, res: Response) => {
     const { email, password } = req.body
 
     if (!(email && password)) { res.status(ERRORS.MISSING_FIELDS.status).json(ERRORS.MISSING_FIELDS) }
@@ -49,7 +49,7 @@ const authenticateUser = async (req: Request, res: Response) => {
     }
 }
 
-const createUser = async (req: Request, res: Response) => {
+export const createUser = async (req: Request, res: Response) => {
     try {
         const {
             email,
@@ -109,7 +109,7 @@ const createUser = async (req: Request, res: Response) => {
     }
 }
 
-const updateUser = (req: Request, res: Response) => {
+export const updateUser = (req: Request, res: Response) => {
     const id = req.body.id
 
     const fields = req.body
@@ -121,7 +121,7 @@ const updateUser = (req: Request, res: Response) => {
     DefaultController.update(req, res, id, fields, validation)
 }
 
-const deleteUser = (req: Request, res: Response) => {
+export const deleteUser = (req: Request, res: Response) => {
     const { token } = req.body
 
     jwt.verify(token, process.env.SECRET, (error: Error, decoded: any) => {

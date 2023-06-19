@@ -40,7 +40,8 @@ app.use('/cards', CardRoute)
 
 app.use("/api-docs", swaggerUi.serve, swaggerUi.setup(specs, { explorer: true }))
 
-app.listen(SERVER_PORT).on('listening', () => logger.info('server is up on port: ' + SERVER_PORT))
+app.listen(SERVER_PORT)
+    .on('listening', () => logger.info('server is up on port: ' + SERVER_PORT))
 
 connectToDataBase(MONGO_URI)
 
