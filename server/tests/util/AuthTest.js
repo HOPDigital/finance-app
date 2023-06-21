@@ -7,7 +7,7 @@ import { signUser } from "../../middleware/auth";
 import { logger } from "../../services/Logger";
 
 
-export default async function getToken(email: string, password: string) {
+async function getToken(email, password) {
 
     if (!(email && password)) { logger.error('No email or password given') }
 
@@ -28,3 +28,5 @@ export default async function getToken(email: string, password: string) {
         logger.error('Could not generate token')
     }
 }
+
+module.exports = getToken
