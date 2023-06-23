@@ -16,6 +16,7 @@ dependencies:
   animated_splash_screen: ^1.3.0
   shared_preferences:
   pin_code_fields: ^7.4.0
+  country_flags: ^2.0.0
 
 dev_dependencies:
   flutter_test:
@@ -26,6 +27,8 @@ flutter:
   uses-material-design: true
   assets:
     - assets/images/
+    - assets/language/
+    
   fonts:
     - family: Montserrat
       fonts:
